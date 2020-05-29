@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd `dirname $0`
+
+count=`docker-compose ps | sed -n '3,50p' | grep -v 'Exit ' | awk 'END{print NR}'`
+
+if [ $count == 0 ]; then
+    docker-sync start
+    docker-compose up -d
+else
+    echo "Docker is already running !!"
+fi

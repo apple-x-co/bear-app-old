@@ -1,0 +1,6 @@
+/.db
+/.localstack
+/.mongo
+/.mongo.configdb
+/setup/initdb.sql
+/.docker-sync
