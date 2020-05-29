@@ -1,7 +1,7 @@
 # BEAR.App
 
 ```bash
-composer create-project -n bear/skeleton app --no-dev
+composer create-project -n bear/skeleton app
 ```
 
 ## Reference

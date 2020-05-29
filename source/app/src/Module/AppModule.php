@@ -16,6 +16,9 @@ class AppModule extends AbstractAppModule
         if (file_exists($env)) {
             (new Loader($env))->parse()->putenv(true);
         }
+
+        $this->install(new DddCoreModule());
+
         $this->install(new PackageModule);
     }
 }

@@ -14,7 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "MyVendor\\MyProject\\": "src/"
+            "MyVendor\\MyProject\\": "src/",
+            "AppCore\\": "ddd/core/src/"
         }
     },
     "autoload-dev": {
