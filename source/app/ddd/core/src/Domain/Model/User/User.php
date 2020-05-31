@@ -11,6 +11,10 @@ final class User
 {
     use ModelTrait;
 
+    // 値オブジェクトにする基準
+    // ・ルールが存在しているか
+    // ・その値を単体で扱いたいか
+
     /** @var UserId */
     private $id;
 
