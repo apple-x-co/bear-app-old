@@ -10,6 +10,9 @@ use AppCore\Domain\Model\User\UserRepositoryInterface;
 // 可能な限りドメインサービスのは避ける
 // エンティティや値ブジェクトに定義できるものであれば、そこに定義する
 
+// ドメインオブジェクトは、値オブジェクトやエンティティと同じ括りである。
+// ただし、ドメインに基づいているものであり、それを実現するサービスであれば、ドメインサービスである。
+
 final class UserService
 {
     /** @var UserRepositoryInterface */
