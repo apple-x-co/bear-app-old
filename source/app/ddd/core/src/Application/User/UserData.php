@@ -4,42 +4,52 @@
 namespace AppCore\Application\User;
 
 
-use AppCore\Domain\Model\User\UserId;
-use AppCore\Domain\Model\User\UserName;
+use AppCore\Domain\Model\User\User;
 
 final class UserData
 {
-    /** @var UserId */
+    /** @var int */
     private $id;
 
-    /** @var UserName */
+    /** @var string */
     private $userName;
+
+    /** @var string */
+    private $email;
 
     /**
      * UserData constructor.
      *
-     * @param UserId $id
-     * @param UserName $userName
+     * @param User
      */
-    public function __construct(UserId $id, UserName $userName)
+    public function __construct(User $user)
     {
-        $this->id       = $id;
-        $this->userName = $userName;
+        $this->id       = $user->getId()->val();
+        $this->userName = $user->getUserName()->val();
+        $this->email    = $user->getEmail()->val();
     }
 
     /**
-     * @return UserId
+     * @return int
      */
-    public function getId(): UserId
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return UserName
+     * @return string
      */
-    public function getUserName(): UserName
+    public function getUserName(): string
     {
         return $this->userName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 }

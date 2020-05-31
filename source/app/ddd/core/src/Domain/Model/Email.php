@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
 
-namespace AppCore\Domain\Model\User;
+namespace AppCore\Domain\Model;
 
 
-final class UserName
+final class Email
 {
     private $value;
 
     /**
-     * UserName constructor.
+     * Email constructor.
      *
      * @param $value
      */

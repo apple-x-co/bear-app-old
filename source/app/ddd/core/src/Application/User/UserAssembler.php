@@ -15,9 +15,6 @@ final class UserAssembler
      */
     public function toDto(User $user): UserData
     {
-        return new UserData(
-            $user->getId(),
-            $user->getUserName()
-        );
+        return new UserData($user);
     }
 }
