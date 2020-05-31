@@ -57,4 +57,22 @@ final class User
     {
         return $this->email;
     }
+
+    /**
+     * @param UserName $userName
+     */
+    public function changeUserName(UserName $userName): void
+    {
+        $this->setDirtyProperty('userName');
+        $this->userName = $userName;
+    }
+
+    /**
+     * @param Email $email
+     */
+    public function changeEmail(Email $email): void
+    {
+        $this->setDirtyProperty('email');
+        $this->email = $email;
+    }
 }

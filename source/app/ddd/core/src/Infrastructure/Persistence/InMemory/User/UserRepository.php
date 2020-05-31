@@ -62,4 +62,12 @@ final class UserRepository implements UserRepositoryInterface
     {
         $this->users[] = $user;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function remove(User $user): void
+    {
+        // TODO: Implement remove() method.
+    }
 }

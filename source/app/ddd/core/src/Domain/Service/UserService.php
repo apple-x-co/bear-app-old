@@ -30,7 +30,7 @@ final class UserService
     public function exists(User $user): bool
     {
         $users = $this->userRepository->find([
-            'email' => (string)$user->getEmail()
+            'email' => $user->getEmail()->val()
         ]);
 
         return ! empty($users);

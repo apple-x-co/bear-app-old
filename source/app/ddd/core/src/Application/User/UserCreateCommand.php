@@ -4,41 +4,38 @@
 namespace AppCore\Application\User;
 
 
-use AppCore\Domain\Model\Email;
-use AppCore\Domain\Model\User\UserName;
-
 final class UserCreateCommand
 {
-    /** @var UserName */
+    /** @var string */
     private $userName;
 
-    /** @var Email */
+    /** @var string */
     private $email;
 
     /**
      * UserCreateCommand constructor.
      *
-     * @param UserName $userName
-     * @param Email $email
+     * @param string $userName
+     * @param string $email
      */
-    public function __construct(UserName $userName, Email $email)
+    public function __construct(string $userName, string $email)
     {
         $this->userName = $userName;
         $this->email    = $email;
     }
 
     /**
-     * @return UserName
+     * @return string
      */
-    public function getUserName(): UserName
+    public function getUserName(): string
     {
         return $this->userName;
     }
 
     /**
-     * @return Email
+     * @return string
      */
-    public function getEmail(): Email
+    public function getEmail(): string
     {
         return $this->email;
     }

@@ -42,4 +42,11 @@ interface UserRepositoryInterface
      * @return void
      */
     public function store(User $user): void;
+
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
+    public function remove(User $user): void;
 }

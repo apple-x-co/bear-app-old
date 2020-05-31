@@ -4,8 +4,11 @@
 namespace AppCore\Application\User;
 
 
+use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserDuplicationException;
+use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;
+use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
 use AppCore\Domain\Service\UserService;
 
@@ -30,11 +33,27 @@ final class UserApplicationService
     }
 
     /**
+     * @param UserGetCommand $command
+     *
+     * @return UserData
+     */
+    public function get(UserGetCommand $command): UserData
+    {
+        $user = $this->userRepository->get($command->getId());
+
+        return (new UserAssembler())->toDto($user);
+    }
+
+    /**
      * @param UserCreateCommand $command
      */
     public function create(UserCreateCommand $command): void
     {
-        $user = new User(null, $command->getUserName(), $command->getEmail());
+        $user = new User(
+            null,
+            new UserName($command->getUserName()),
+            new Email($command->getEmail())
+        );
 
         if ($this->userService->exists($user)) {
             throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
@@ -44,14 +63,41 @@ final class UserApplicationService
     }
 
     /**
-     * @param UserGetCommand $command
-     *
-     * @return UserData
+     * @param UserUpdateCommand $command
      */
-    public function get(UserGetCommand $command): UserData
+    public function update(UserUpdateCommand $command): void
     {
-        $user = $this->userRepository->get(0);
+        $user = $this->userRepository->one([
+            'id' => $command->getId()
+        ]);
+        if ($user === null) {
+            throw new UserNotFoundException(sprintf('id : %d', $command->getId()));
+        }
 
-        return (new UserAssembler())->toDto($user);
+        if ($this->userService->exists($user)) {
+            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
+        }
+
+        if ($command->getUserName() !== null) {
+            $user->changeUserName(new UserName($command->getUserName()));
+        }
+        if ($command->getEmail() !== null) {
+            $user->changeEmail(new Email($command->getEmail()));
+        }
+    }
+
+    /**
+     * @param UserDeleteCommand $command
+     */
+    public function delete(UserDeleteCommand $command): void
+    {
+        $user = $this->userRepository->one([
+            'id' => $command->getId()
+        ]);
+        if ($user === null) {
+            throw new UserNotFoundException(sprintf('id : %d', $command->getId()));
+        }
+
+        $this->userRepository->remove($user);
     }
 }
