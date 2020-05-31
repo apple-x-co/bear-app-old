@@ -60,7 +60,16 @@ final class UserRepository implements UserRepositoryInterface
      */
     public function store(User $user): void
     {
-        $this->users[] = $user;
+        if ($user->isNew()) {
+            $this->users[] = $user;
+            return;
+        }
+
+        if ($user->isDirty()) {
+            return;
+        }
+
+        // update
     }
 
     /**
