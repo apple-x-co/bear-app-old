@@ -4,7 +4,7 @@
 namespace AppCore\Domain\Model\User\Exception;
 
 
-use BEAR\Sunday\Exception\RuntimeException;
+use AppCore\Exception\RuntimeException;
 
 final class UserNotFoundException extends RuntimeException
 {

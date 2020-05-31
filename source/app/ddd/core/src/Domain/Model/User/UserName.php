@@ -4,6 +4,8 @@
 namespace AppCore\Domain\Model\User;
 
 
+use AppCore\Exception\RuntimeException;
+
 final class UserName
 {
     private $value;
@@ -15,6 +17,10 @@ final class UserName
      */
     public function __construct($value)
     {
+        if (strlen($value) < 3) {
+            throw new RuntimeException('');
+        }
+
         $this->value = $value;
     }
 
