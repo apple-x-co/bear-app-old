@@ -7,6 +7,9 @@ namespace AppCore\Domain\Service;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
 
+// 可能な限りドメインサービスのは避ける
+// エンティティや値ブジェクトに定義できるものであれば、そこに定義する
+
 final class UserService
 {
     /** @var UserRepositoryInterface */
