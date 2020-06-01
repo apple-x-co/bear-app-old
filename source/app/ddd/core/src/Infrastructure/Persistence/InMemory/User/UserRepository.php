@@ -62,6 +62,7 @@ final class UserRepository implements UserRepositoryInterface
     {
         if ($user->isNew()) {
             $this->users[] = $user;
+
             return;
         }
 
@@ -78,5 +79,21 @@ final class UserRepository implements UserRepositoryInterface
     public function remove(User $user): void
     {
         // TODO: Implement remove() method.
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return array{
+     *     user_name: string,
+     *     email: string
+     * }
+     */
+    private function toRawData(User $user): array
+    {
+        return [
+            'user_name' => $user->getUserName()->val(),
+            'email'     => $user->getEmail()->val()
+        ];
     }
 }
