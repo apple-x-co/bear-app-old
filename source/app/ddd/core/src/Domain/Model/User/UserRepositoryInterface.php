@@ -15,6 +15,13 @@ interface UserRepositoryInterface
 
     /**
      * @param array $conditions
+     *
+     * @return int
+     */
+    public function count(array $conditions): int;
+
+    /**
+     * @param array $conditions
      * @param array $options
      *
      * @return User[]
@@ -49,4 +56,14 @@ interface UserRepositoryInterface
      * @return void
      */
     public function remove(User $user): void;
+
+    /**
+     * @param User $user
+     *
+     * @return array{
+     *     user_name: string,
+     *     email: string
+     * }
+     */
+    public function toRawData(User $user): array;
 }

@@ -29,6 +29,14 @@ final class UserRepository implements UserRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function count(array $conditions): int
+    {
+        return count($this->users);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function find(array $conditions, array $options = []): array
     {
         return $this->users;
@@ -82,14 +90,9 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param User $user
-     *
-     * @return array{
-     *     user_name: string,
-     *     email: string
-     * }
+     * @inheritDoc
      */
-    private function toRawData(User $user): array
+    public function toRawData(User $user): array
     {
         return [
             'user_name' => $user->getUserName()->val(),
