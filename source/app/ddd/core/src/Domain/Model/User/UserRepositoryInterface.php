@@ -66,4 +66,11 @@ interface UserRepositoryInterface
      * }
      */
     public function toRawData(User $user): array;
+
+    /**
+     * @param array $conditions
+     *
+     * @return array
+     */
+    public function makeWhere(array $conditions): array;
 }

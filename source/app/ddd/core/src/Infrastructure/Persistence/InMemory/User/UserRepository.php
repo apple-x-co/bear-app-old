@@ -31,6 +31,8 @@ final class UserRepository implements UserRepositoryInterface
      */
     public function count(array $conditions): int
     {
+        $conditions = $this->makeWhere($conditions);
+
         return count($this->users);
     }
 
@@ -39,6 +41,8 @@ final class UserRepository implements UserRepositoryInterface
      */
     public function find(array $conditions, array $options = []): array
     {
+        $conditions = $this->makeWhere($conditions);
+
         return $this->users;
     }
 
@@ -98,5 +102,13 @@ final class UserRepository implements UserRepositoryInterface
             'user_name' => $user->getUserName()->val(),
             'email'     => $user->getEmail()->val()
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function makeWhere(array $conditions): array
+    {
+        return $conditions;
     }
 }
