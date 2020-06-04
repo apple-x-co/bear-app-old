@@ -9,7 +9,7 @@ trait ModelTrait
     /** @var bool */
     private $new = true;
 
-    /** @var array */
+    /** @var array<string, bool> */
     private $dirties = [];
 
     /**

@@ -12,6 +12,11 @@ use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
 use AppCore\Domain\Service\UserService;
 
+// LCOM（Lack of Cohesion in Methods）の観点で、凝縮度を高くするために
+// UserRegisterService, UserDeleteService, UserUpdateService に分けることも可。
+// その場合は、UserRegisterServiceInterface->handle などのインターフェースを用意する。
+// ※ ドメイン駆動設計入門 位置 2477
+
 final class UserApplicationService
 {
     /** @var UserRepositoryInterface */

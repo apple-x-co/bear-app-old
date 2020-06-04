@@ -14,30 +14,30 @@ interface UserRepositoryInterface
     public function get(int $id): User;
 
     /**
-     * @param array $conditions
+     * @param array<string, string|int|array> $conditions
      *
      * @return int
      */
     public function count(array $conditions): int;
 
     /**
-     * @param array $conditions
-     * @param array $options
+     * @param array<string, string|int|array> $conditions
+     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
      * @return User[]
      */
     public function find(array $conditions, array $options = []): array;
 
     /**
-     * @param array $conditions
-     * @param array $options
+     * @param array<string, string|int|array> $conditions
+     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
      * @return User|null
      */
     public function one(array $conditions, array $options = []): ?User;
 
     /**
-     * @param array $options
+     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
      * @return User[]
      */
@@ -68,7 +68,7 @@ interface UserRepositoryInterface
     public function toRawData(User $user): array;
 
     /**
-     * @param array $conditions
+     * @param array<string, string|int|array> $conditions
      *
      * @return array
      */
