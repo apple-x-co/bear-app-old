@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app:
+    image: buddyingdevelopment/php:amzn2-php72-apache24
+    container_name: bear-app
+    working_dir: /var/www/vhosts/bear
+    volumes:
+      - bear-source:/var/www/vhosts/bear:rw
+      - ./vhosts.conf:/etc/httpd/conf.d/vhosts.conf
+    ports:
+      - '8000:80'
+    environment:
+      - PHP_XDEBUG=off
+      - COMPOSER_ALLOW_SUPERUSER=1
+
+volumes:
+  bear-source:
+    external: true
