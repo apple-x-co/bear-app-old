@@ -23,17 +23,17 @@ jobs:
         working-directory: ${{env.working-directory}}
         run: composer validate
 
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ runner.os }}-node-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#      - name: Cache Composer packages
+#        id: composer-cache
+#        uses: actions/cache@v2
+#        with:
+#          path: vendor
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/composer.lock') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+#        if: steps.composer-cache.outputs.cache-hit != 'true'
         working-directory: ${{env.working-directory}}
         run: composer install --prefer-dist --no-progress --no-suggest
 
