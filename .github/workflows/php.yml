@@ -38,4 +38,5 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run test suite
+        working-directory: ${{env.working-directory}}
         run: composer run-script test
