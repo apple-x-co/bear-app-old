@@ -6,6 +6,11 @@
 composer create-project -n bear/skeleton app
 ```
 
+```bash
+composer cs-fix
+composer test
+```
+
 ## Reference
 
 BEAR.Sunday, REST実装手順  

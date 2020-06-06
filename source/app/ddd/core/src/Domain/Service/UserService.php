@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Domain\Service;
-
 
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
@@ -33,7 +31,7 @@ final class UserService
      *
      * @return bool
      */
-    public function exists(User $user): bool
+    public function exists(User $user) : bool
     {
         $users = $this->userRepository->find([
             'email' => $user->getEmail()->val()

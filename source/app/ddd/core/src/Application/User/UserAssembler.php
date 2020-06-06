@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
 
 use AppCore\Domain\Model\User\User;
 
@@ -13,7 +11,7 @@ final class UserAssembler
      *
      * @return UserData
      */
-    public function toDto(User $user): UserData
+    public function toDto(User $user) : UserData
     {
         return new UserData($user);
     }

@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace MyVendor\MyProject\Module;
-
 
 use AppCore\Application\User\UserApplicationService;
 use AppCore\Domain\Model\User\UserRepositoryInterface;

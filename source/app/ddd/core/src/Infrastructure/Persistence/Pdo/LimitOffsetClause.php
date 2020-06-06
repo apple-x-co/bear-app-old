@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Infrastructure\Persistence\Pdo;
-
 
 use Aura\SqlQuery\Common\SelectInterface;
 
@@ -26,7 +24,7 @@ final class LimitOffsetClause
      *
      * @return SelectInterface
      */
-    public function __invoke(SelectInterface $limitOffset): SelectInterface
+    public function __invoke(SelectInterface $limitOffset) : SelectInterface
     {
         if (isset($this->options['offset'])) {
             $limitOffset->offset($this->options['offset']);

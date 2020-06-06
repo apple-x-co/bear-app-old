@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Infrastructure\Persistence\InMemory\User;
-
 
 use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;
@@ -14,9 +12,9 @@ final class UserRepository implements UserRepositoryInterface
     private $users = [];
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function get(int $id): User
+    public function get(int $id) : User
     {
         $users = $this->find(['id' => $id], []);
         if (empty($users)) {
@@ -27,9 +25,9 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function count(array $conditions): int
+    public function count(array $conditions) : int
     {
         $conditions = $this->makeWhere($conditions);
 
@@ -37,9 +35,9 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function find(array $conditions, array $options = []): array
+    public function find(array $conditions, array $options = []) : array
     {
         $conditions = $this->makeWhere($conditions);
 
@@ -47,9 +45,9 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function one(array $conditions, array $options = []): ?User
+    public function one(array $conditions, array $options = []) : ?User
     {
         $users = $this->find($conditions, []);
         if (empty($users)) {
@@ -60,17 +58,17 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function getAll(array $options = []): array
+    public function getAll(array $options = []) : array
     {
         return $this->find([], $options);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function store(User $user): void
+    public function store(User $user) : void
     {
         if ($user->isNew()) {
             $this->users[] = $user;
@@ -86,28 +84,28 @@ final class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function remove(User $user): void
+    public function remove(User $user) : void
     {
         // TODO: Implement remove() method.
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function toRawData(User $user): array
+    public function toRawData(User $user) : array
     {
         return [
             'user_name' => $user->getUserName()->val(),
-            'email'     => $user->getEmail()->val()
+            'email' => $user->getEmail()->val()
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function makeWhere(array $conditions): array
+    public function makeWhere(array $conditions) : array
     {
         return $conditions;
     }

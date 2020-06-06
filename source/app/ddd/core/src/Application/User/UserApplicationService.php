@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
 
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserDuplicationException;
@@ -29,12 +27,12 @@ final class UserApplicationService
      * UserApplicationService constructor.
      *
      * @param UserRepositoryInterface $userRepository
-     * @param UserService $userService
+     * @param UserService             $userService
      */
     public function __construct(UserRepositoryInterface $userRepository, UserService $userService)
     {
         $this->userRepository = $userRepository;
-        $this->userService    = $userService;
+        $this->userService = $userService;
     }
 
     /**
@@ -42,7 +40,7 @@ final class UserApplicationService
      *
      * @return UserData
      */
-    public function get(UserGetCommand $command): UserData
+    public function get(UserGetCommand $command) : UserData
     {
         $user = $this->userRepository->get($command->getId());
 
@@ -52,7 +50,7 @@ final class UserApplicationService
     /**
      * @param UserCreateCommand $command
      */
-    public function create(UserCreateCommand $command): void
+    public function create(UserCreateCommand $command) : void
     {
         $user = new User(
             null,
@@ -61,7 +59,7 @@ final class UserApplicationService
         );
 
         if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
+            throw new UserDuplicationException(sprintf('email : %s', (string) $user->getEmail()));
         }
 
         $this->userRepository->store($user);
@@ -70,7 +68,7 @@ final class UserApplicationService
     /**
      * @param UserUpdateCommand $command
      */
-    public function update(UserUpdateCommand $command): void
+    public function update(UserUpdateCommand $command) : void
     {
         $user = $this->userRepository->one([
             'id' => $command->getId()
@@ -80,7 +78,7 @@ final class UserApplicationService
         }
 
         if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
+            throw new UserDuplicationException(sprintf('email : %s', (string) $user->getEmail()));
         }
 
         if ($command->getUserName() !== null) {
@@ -94,7 +92,7 @@ final class UserApplicationService
     /**
      * @param UserDeleteCommand $command
      */
-    public function delete(UserDeleteCommand $command): void
+    public function delete(UserDeleteCommand $command) : void
     {
         $user = $this->userRepository->one([
             'id' => $command->getId()

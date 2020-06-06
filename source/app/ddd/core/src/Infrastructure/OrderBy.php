@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Infrastructure;
-
 
 final class OrderBy
 {
@@ -25,13 +23,13 @@ final class OrderBy
     public function __construct(string $column_name, string $direction = self::ASC)
     {
         $this->column_name = $column_name;
-        $this->direction   = $direction;
+        $this->direction = $direction;
     }
 
     /**
      * @return string
      */
-    public function getColumnName(): string
+    public function getColumnName() : string
     {
         return $this->column_name;
     }
@@ -39,7 +37,7 @@ final class OrderBy
     /**
      * @return bool
      */
-    public function isAsc(): bool
+    public function isAsc() : bool
     {
         return strtolower($this->direction) === self::ASC;
     }

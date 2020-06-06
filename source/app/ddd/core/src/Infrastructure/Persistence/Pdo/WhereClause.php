@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Infrastructure\Persistence\Pdo;
-
 
 use Aura\SqlQuery\Common\WhereInterface;
 
@@ -38,7 +36,7 @@ final class WhereClause
     public function __construct(array $conditions, array $aliases = [])
     {
         $this->conditions = $conditions;
-        $this->aliases    = $aliases;
+        $this->aliases = $aliases;
     }
 
     /**
@@ -96,7 +94,7 @@ final class WhereClause
      *
      * @return array
      */
-    private function splitColumnOperator(string $column_name): array
+    private function splitColumnOperator(string $column_name) : array
     {
         if (substr($column_name, -3) === self::OPERATION_IN) {
             return ['IN', substr($column_name, 0, strpos($column_name, self::OPERATION_IN))];

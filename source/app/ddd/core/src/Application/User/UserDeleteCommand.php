@@ -1,11 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
-
-use AppCore\Domain\Model\Email;
-use AppCore\Domain\Model\User\UserName;
 
 final class UserDeleteCommand
 {
@@ -25,7 +20,7 @@ final class UserDeleteCommand
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId() : int
     {
         return $this->id;
     }

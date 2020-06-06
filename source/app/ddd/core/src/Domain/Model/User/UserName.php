@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Domain\Model\User;
-
 
 use AppCore\Exception\RuntimeException;
 
@@ -27,7 +25,7 @@ final class UserName
     /**
      * @return string
      */
-    public function val(): string
+    public function val() : string
     {
         return $this->value;
     }

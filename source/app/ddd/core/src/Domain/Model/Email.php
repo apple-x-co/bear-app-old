@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Domain\Model;
-
 
 final class Email
 {
@@ -21,7 +19,7 @@ final class Email
     /**
      * @return string
      */
-    public function val(): string
+    public function val() : string
     {
         return $this->value;
     }
