@@ -1,5 +1,7 @@
 # BEAR.App
 
+![PHP Test](https://github.com/apple-x-co/BEAR.App/workflows/PHP%20Test/badge.svg?branch=develop)
+
 ```bash
 composer create-project -n bear/skeleton app
 ```
