@@ -2,19 +2,25 @@ name: PHP Test
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - develop
   pull_request:
-    branches: [ master ]
+    branches:
+      - develop
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    env:
+      working-directory: ./source/app
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Validate composer.json and composer.lock
+        working-directory: ${{env.working-directory}}
         run: composer validate
 
       - name: Cache Composer packages
@@ -28,6 +34,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
+        working-directory: ${{env.working-directory}}
         run: composer install --prefer-dist --no-progress --no-suggest
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
