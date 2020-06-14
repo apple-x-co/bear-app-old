@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace AppCore\Infrastructure\Persistence\InMemory\User;
+namespace AppCore\Infrastructure\Persistence\InMemory;
 
 use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;

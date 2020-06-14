@@ -1,2 +1,2 @@
-SELECT id, username, email, password, created_at, updated_at
+SELECT id, username, email, created_at, updated_at
   FROM users

@@ -19,18 +19,6 @@
       "type": "string",
       "minLength": 6,
       "maxLength": 100
-    },
-    "password": {
-      "type": "string",
-      "maxLength": 255
-    },
-    "created_at": {
-      "type": "string",
-      "format": "datetime"
-    },
-    "updated_at": {
-      "type": "string",
-      "format": "datetime"
     }
   }
 }

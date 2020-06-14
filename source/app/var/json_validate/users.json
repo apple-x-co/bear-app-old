@@ -12,15 +12,10 @@
     "email": {
       "type": "string",
       "maxLength": 100
-    },
-    "password": {
-      "type": "string",
-      "maxLength": 100
     }
   },
   "required": [
     "username",
-    "email",
-    "password"
+    "email"
   ]
 }

@@ -1,2 +1,2 @@
-INSERT INTO users (username, email, password, created_at, updated_at)
-VALUES (:username, :email, :password, now(), now());
+INSERT INTO users (username, email, created_at, updated_at)
+VALUES (:username, :email, now(), now());
