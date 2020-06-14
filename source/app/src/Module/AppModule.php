@@ -7,6 +7,7 @@ use BEAR\Package\Provide\Router\AuraRouterModule;
 use BEAR\Resource\Module\JsonSchemaModule;
 use josegonzalez\Dotenv\Loader;
 use Ray\AuraSqlModule\AuraSqlModule;
+use Ray\AuraSqlModule\AuraSqlQueryModule;
 use Ray\Query\SqlQueryModule;
 
 class AppModule extends AbstractAppModule
@@ -32,6 +33,7 @@ class AppModule extends AbstractAppModule
                 getenv('APP_SLAVE_DB_HOSTS')
             )
         );
+        $this->install(new AuraSqlQueryModule('mysql'));
         $this->install(new SqlQueryModule($appDir . '/var/sql'));
 
         # Json Schema

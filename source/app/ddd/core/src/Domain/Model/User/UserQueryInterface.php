@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AppCore\Domain\Model\User;
 
+use Generator;
+
 interface UserQueryInterface
 {
     /**
@@ -18,9 +20,26 @@ interface UserQueryInterface
     public function all() : array;
 
     /**
-     * @param User $user
+     * @param array $conditions
+     *
+     * @return int
      */
-    public function store(User $user) : void;
+    public function count(array $conditions = []) : int;
+
+    /**
+     * @param array $conditions
+     * @param array $options
+     *
+     * @return Generator
+     */
+    public function find(array $conditions = [], array $options = []) : Generator;
+
+    /**
+     * @param User $user
+     *
+     * @return User
+     */
+    public function store(User $user) : User;
 
     /**
      * @param int $id

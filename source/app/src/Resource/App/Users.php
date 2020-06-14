@@ -43,7 +43,8 @@ class Users extends ResourceObject
      */
     public function onGet(): ResourceObject
     {
-        $users = $this->userQuery->all();
+//        $users = $this->userQuery->all();
+        $users = $this->userQuery->find();
 
         $array = [];
         foreach ($users as $user) {
@@ -73,7 +74,7 @@ class Users extends ResourceObject
         string $username,
         string $email
     ): ResourceObject {
-        $this->userQuery->store(
+        $user = $this->userQuery->store(
             new \AppCore\Domain\Model\User\User(
                 null,
                 new UserName($username),
@@ -82,7 +83,7 @@ class Users extends ResourceObject
         );
 
         $this->code = StatusCode::CREATED;
-        //$this->headers[ResponseHeader::LOCATION] = '/users/1';
+        $this->headers[ResponseHeader::LOCATION] = '/users/' . $user->getId()->val();
 
         return $this;
     }

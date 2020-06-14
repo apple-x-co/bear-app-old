@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+namespace AppCore\Infrastructure\Persistence\Query;
+
+use Ray\AuraSqlModule\AuraSqlInject;
+use Ray\AuraSqlModule\AuraSqlSelectInject;
+use Ray\Query\QueryInterface;
+
+final class UsersCounter implements QueryInterface
+{
+    use AuraSqlInject;
+    use AuraSqlSelectInject;
+
+    /**
+     * @inheritDoc
+     */
+    public function __invoke(array ...$query)
+    {
+        [$conditions] = $query;
+
+        $select = clone $this->select;
+
+        $select
+            ->cols([
+                'COUNT(id) as count'
+            ])
+            ->from('users');
+
+        $select = (new WhereClause($conditions))($select);
+
+        return (int)($this->pdo->fetchValue($select->getStatement(), $select->getBindValues()));
+    }
+}
