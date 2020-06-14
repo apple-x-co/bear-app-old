@@ -2,13 +2,19 @@
 
 ![PHP Test](https://github.com/apple-x-co/BEAR.App/workflows/PHP%20Test/badge.svg?branch=develop)
 
-```bash
-composer create-project -n bear/skeleton app
-```
+## create project
 
 ```bash
-composer cs-fix
-composer test
+composer create-project -n bear/skeleton app
+composer require bear/aura-router-module ray/query-module
+composer setup
+```
+
+## API structure
+
+```bash
+php bin/app.php get /
+php bin/app.php options /users
 ```
 
 ## Reference
