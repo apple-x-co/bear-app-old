@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace AppCore\Domain\Model\User;
 
 use Generator;
@@ -20,15 +19,15 @@ interface UserQueryInterface
     public function all() : array;
 
     /**
-     * @param array $conditions
+     * @param array<string, string|int|array> $conditions
      *
      * @return int
      */
     public function count(array $conditions = []) : int;
 
     /**
-     * @param array $conditions
-     * @param array $options
+     * @param array<string, string|int|array>                                             $conditions
+     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
      * @return Generator
      */

@@ -24,7 +24,7 @@ class AppModule extends AbstractAppModule
 
         $appDir = $this->appMeta->appDir;
 
-        # DB
+        // DB
         $this->install(
             new AuraSqlModule(
                 getenv('APP_DB_DNS'),
@@ -36,7 +36,7 @@ class AppModule extends AbstractAppModule
         $this->install(new AuraSqlQueryModule('mysql'));
         $this->install(new SqlQueryModule($appDir . '/var/sql'));
 
-        # Json Schema
+        // Json Schema
         $this->install(
             new JsonSchemaModule(
                 $appDir . '/var/json_schema',
@@ -44,10 +44,10 @@ class AppModule extends AbstractAppModule
             )
         );
 
-        # Router
+        // Router
         $this->install(new AuraRouterModule($appDir . '/var/conf/aura.route.php'));
 
-        # DDD
+        // DDD
         $this->install(new DddCoreModule());
 
         $this->install(new PackageModule);

@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace AppCore\Infrastructure\Persistence\Query;
 
 use Ray\AuraSqlModule\AuraSqlInject;
@@ -13,7 +12,7 @@ final class UsersCounter implements QueryInterface
     use AuraSqlSelectInject;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __invoke(array ...$query)
     {
@@ -29,6 +28,6 @@ final class UsersCounter implements QueryInterface
 
         $select = (new WhereClause($conditions))($select);
 
-        return (int)($this->pdo->fetchValue($select->getStatement(), $select->getBindValues()));
+        return (int) ($this->pdo->fetchValue($select->getStatement(), $select->getBindValues()));
     }
 }

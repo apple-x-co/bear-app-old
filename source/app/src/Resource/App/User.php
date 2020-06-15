@@ -1,18 +1,14 @@
 <?php
 declare(strict_types=1);
-
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Domain\Model\User\UserQueryInterface;
-use BEAR\RepositoryModule\Annotation\Cacheable;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
-use Ray\Query\Annotation\Query;
 
 /**
  * Class User
- * @package MyVendor\MyProject\Resource\App
  */
 class User extends ResourceObject
 {
@@ -36,14 +32,14 @@ class User extends ResourceObject
      *
      * @JsonSchema(schema="user.json")
      */
-    public function onGet(int $id): ResourceObject
+    public function onGet(int $id) : ResourceObject
     {
         $user = $this->userQuery->get($id);
 
         $this->body = [
-            'id'       => $user->getId()->val(),
+            'id' => $user->getId()->val(),
             'username' => $user->getUserName()->val(),
-            'email'    => $user->getEmail()->val()
+            'email' => $user->getEmail()->val()
         ];
 
         return $this;

@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace MyVendor\MyProject\Module;
 
 use josegonzalez\Dotenv\Loader;
@@ -9,9 +8,8 @@ use Ray\Di\AbstractModule;
 
 final class TestModule extends AbstractModule
 {
-
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function configure()
     {

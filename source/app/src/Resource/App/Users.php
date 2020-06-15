@@ -1,25 +1,19 @@
 <?php
 declare(strict_types=1);
-
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserQueryInterface;
-use BEAR\Package\Annotation\ReturnCreatedResource;
-use BEAR\RepositoryModule\Annotation\Cacheable;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
 use Ray\AuraSqlModule\Annotation\Transactional;
-use Ray\Di\Di\Named;
-use Ray\Query\Annotation\Query;
 
 /**
  * Class Users
- * @package MyVendor\MyProject\Resource\App
  */
 class Users extends ResourceObject
 {
@@ -41,7 +35,7 @@ class Users extends ResourceObject
      *
      * @JsonSchema(schema="users.json")
      */
-    public function onGet(): ResourceObject
+    public function onGet() : ResourceObject
     {
 //        $users = $this->userQuery->all();
         $users = $this->userQuery->find();
@@ -49,9 +43,9 @@ class Users extends ResourceObject
         $array = [];
         foreach ($users as $user) {
             $array[] = [
-                'id'       => $user->getId()->val(),
+                'id' => $user->getId()->val(),
                 'username' => $user->getUserName()->val(),
-                'email'    => $user->getEmail()->val()
+                'email' => $user->getEmail()->val()
             ];
         }
 
@@ -73,7 +67,7 @@ class Users extends ResourceObject
     public function onPost(
         string $username,
         string $email
-    ): ResourceObject {
+    ) : ResourceObject {
         $user = $this->userQuery->store(
             new \AppCore\Domain\Model\User\User(
                 null,

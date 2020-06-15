@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace AppCore\Infrastructure\Persistence\Query;
 
 use Ray\AuraSqlModule\AuraSqlInject;
@@ -13,7 +12,7 @@ final class UsersFinder implements QueryInterface
     use AuraSqlSelectInject;
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __invoke(array ...$query)
     {

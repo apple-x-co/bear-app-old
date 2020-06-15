@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-
 namespace AppCore\Infrastructure\Persistence\Query;
 
 use AppCore\Domain\Model\Email;
+use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserId;
 use AppCore\Domain\Model\User\UserName;
@@ -13,6 +13,7 @@ use Generator;
 use Ray\Di\Di\Named;
 use Ray\Query\RowInterface;
 use Ray\Query\RowListInterface;
+use function sprintf;
 
 final class UserQuery implements UserQueryInterface
 {
@@ -41,12 +42,12 @@ final class UserQuery implements UserQueryInterface
      * UserQuery constructor.
      *
      * @param ExtendedPdoInterface $pdo
-     * @param callable $createUser
-     * @param RowListInterface $getUsers
-     * @param callable $countUsers
-     * @param callable $findUsers
-     * @param RowInterface $getUser
-     * @param callable $deleteUser
+     * @param callable             $createUser
+     * @param RowListInterface     $getUsers
+     * @param callable             $countUsers
+     * @param callable             $findUsers
+     * @param RowInterface         $getUser
+     * @param callable             $deleteUser
      *
      * @Named("createUser=user_insert, getUsers=users_list, countUsers=count_users, findUsers=find_users, getUser=user_by_id, deleteUser=user_delete")
      */
@@ -59,33 +60,37 @@ final class UserQuery implements UserQueryInterface
         RowInterface $getUser,
         callable $deleteUser
     ) {
-        $this->pdo        = $pdo;
+        $this->pdo = $pdo;
         $this->createUser = $createUser;
-        $this->getUsers   = $getUsers;
+        $this->getUsers = $getUsers;
         $this->countUsers = $countUsers;
-        $this->findUsers  = $findUsers;
-        $this->getUser    = $getUser;
+        $this->findUsers = $findUsers;
+        $this->getUser = $getUser;
         $this->deleteUser = $deleteUser;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function get(int $id): User
+    public function get(int $id) : User
     {
         $array = ($this->getUser)(['id' => $id]);
 
+        if (empty($array)) {
+            throw new UserNotFoundException(sprintf('user(id:%d) not found.', $id));
+        }
+
         return new User(
-            new UserId((int)$array['id']),
+            new UserId((int) $array['id']),
             new UserName($array['username']),
             new Email($array['email'])
         );
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function all(): array
+    public function all() : array
     {
         $all = ($this->getUsers)([]);
 
@@ -93,7 +98,7 @@ final class UserQuery implements UserQueryInterface
 
         foreach ($all as $array) {
             $users[] = new User(
-                new UserId((int)$array['id']),
+                new UserId((int) $array['id']),
                 new UserName($array['username']),
                 new Email($array['email'])
             );
@@ -102,25 +107,24 @@ final class UserQuery implements UserQueryInterface
         return $users;
     }
 
-
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function count(array $conditions = []): int
+    public function count(array $conditions = []) : int
     {
         return ($this->countUsers)($conditions);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function find(array $conditions = [], array $options = []): Generator
+    public function find(array $conditions = [], array $options = []) : Generator
     {
         $generator = ($this->findUsers)($conditions, $options);
 
         foreach ($generator as $array) {
             yield new User(
-                new UserId((int)$array['id']),
+                new UserId((int) $array['id']),
                 new UserName($array['username']),
                 new Email($array['email'])
             );
@@ -128,28 +132,28 @@ final class UserQuery implements UserQueryInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function store(User $user): User
+    public function store(User $user) : User
     {
         ($this->createUser)([
             'username' => $user->getUserName()->val(),
-            'email'    => $user->getEmail()->val()
+            'email' => $user->getEmail()->val()
         ]);
 
         $id = $this->pdo->lastInsertId('id');
 
         return new User(
-            new UserId((int)$id),
+            new UserId((int) $id),
             $user->getUserName(),
             $user->getEmail()
         );
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    public function delete(int $id): void
+    public function delete(int $id) : void
     {
         ($this->deleteUser)([
             'id' => $id
