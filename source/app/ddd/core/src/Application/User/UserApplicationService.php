@@ -82,7 +82,7 @@ final class UserApplicationService
             $user->changeEmail(new Email($command->getEmail()));
         }
 
-        // todo: update
+        $this->userQuery->store($user);
     }
 
     /**
