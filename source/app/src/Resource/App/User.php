@@ -2,8 +2,9 @@
 declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\Domain\Model\User\UserQueryInterface;
-use BEAR\RepositoryModule\Annotation\Purge;
+use AppCore\Application\User\UserApplicationService;
+use AppCore\Application\User\UserDeleteCommand;
+use AppCore\Application\User\UserGetCommand;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
 
@@ -12,19 +13,18 @@ use BEAR\Resource\ResourceObject;
  */
 class User extends ResourceObject
 {
-    /** @var UserQueryInterface */
-    private $userQuery;
+    /** @var UserApplicationService */
+    private $userApplicationService;
 
     /**
      * User constructor.
      *
-     * @param UserQueryInterface $userQuery
+     * @param UserApplicationService $userApplicationService
      */
-    public function __construct(UserQueryInterface $userQuery)
+    public function __construct(UserApplicationService $userApplicationService)
     {
-        $this->userQuery = $userQuery;
+        $this->userApplicationService = $userApplicationService;
     }
-
     /**
      * @param int $id
      *
@@ -34,12 +34,14 @@ class User extends ResourceObject
      */
     public function onGet(int $id) : ResourceObject
     {
-        $user = $this->userQuery->get($id);
+        $user = $this->userApplicationService->get(
+            new UserGetCommand($id)
+        );
 
         $this->body = [
-            'id' => $user->getId()->val(),
-            'username' => $user->getUserName()->val(),
-            'email' => $user->getEmail()->val()
+            'id' => $user->getId(),
+            'username' => $user->getUserName(),
+            'email' => $user->getEmail()
         ];
 
         return $this;
@@ -49,12 +51,12 @@ class User extends ResourceObject
      * @param int $id
      *
      * @return ResourceObject
-     *
-     * @Purge(uri="app://self/user")
      */
     public function onDelete(int $id) : ResourceObject
     {
-        $this->userQuery->delete($id);
+        $this->userApplicationService->delete(
+            new UserDeleteCommand($id)
+        );
 
         return $this;
     }

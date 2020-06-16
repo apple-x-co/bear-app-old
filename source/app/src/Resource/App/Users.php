@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
+use AppCore\Application\User\UserApplicationService;
+use AppCore\Application\User\UserCreateCommand;
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserQueryInterface;
@@ -17,17 +19,17 @@ use Ray\AuraSqlModule\Annotation\Transactional;
  */
 class Users extends ResourceObject
 {
-    /** @var UserQueryInterface */
-    private $userQuery;
+    /** @var UserApplicationService */
+    private $userApplicationService;
 
     /**
      * Users constructor.
      *
-     * @param UserQueryInterface $userQuery
+     * @param UserApplicationService $userApplicationService
      */
-    public function __construct(UserQueryInterface $userQuery)
+    public function __construct(UserApplicationService $userApplicationService)
     {
-        $this->userQuery = $userQuery;
+        $this->userApplicationService = $userApplicationService;
     }
 
     /**
@@ -68,16 +70,15 @@ class Users extends ResourceObject
         string $username,
         string $email
     ) : ResourceObject {
-        $user = $this->userQuery->store(
-            new \AppCore\Domain\Model\User\User(
-                null,
-                new UserName($username),
-                new Email($email)
+        $user = $this->userApplicationService->create(
+            new UserCreateCommand(
+                $username,
+                $email
             )
         );
 
         $this->code = StatusCode::CREATED;
-        $this->headers[ResponseHeader::LOCATION] = '/users/' . $user->getId()->val();
+        $this->headers[ResponseHeader::LOCATION] = '/users/' . $user->getId();
 
         return $this;
     }

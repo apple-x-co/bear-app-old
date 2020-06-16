@@ -48,8 +48,10 @@ final class UserApplicationService
 
     /**
      * @param UserCreateCommand $command
+     *
+     * @return UserData
      */
-    public function create(UserCreateCommand $command) : void
+    public function create(UserCreateCommand $command) : UserData
     {
         $user = new User(
             null,
@@ -58,10 +60,12 @@ final class UserApplicationService
         );
 
         if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string) $user->getEmail()));
+            throw new UserDuplicationException(sprintf('email : %s', $command->getEmail()));
         }
 
-        $this->userQuery->store($user);
+        $user = $this->userQuery->store($user);
+
+        return (new UserAssembler())->toDto($user);
     }
 
     /**
