@@ -23,6 +23,9 @@ final class UserQuery implements UserQueryInterface
     /** @var callable */
     private $createUser;
 
+    /** @var callable */
+    private $updateUser;
+
     /** @var RowListInterface */
     private $getUsers;
 
@@ -43,17 +46,19 @@ final class UserQuery implements UserQueryInterface
      *
      * @param ExtendedPdoInterface $pdo
      * @param callable             $createUser
+     * @param callable             $updateUser
      * @param RowListInterface     $getUsers
      * @param callable             $countUsers
      * @param callable             $findUsers
      * @param RowInterface         $getUser
      * @param callable             $deleteUser
      *
-     * @Named("createUser=user_insert, getUsers=users_list, countUsers=count_users, findUsers=find_users, getUser=user_by_id, deleteUser=user_delete")
+     * @Named("createUser=user_insert, updateUser=user_update, getUsers=users_list, countUsers=count_users, findUsers=find_users, getUser=user_by_id, deleteUser=user_delete")
      */
     public function __construct(
         ExtendedPdoInterface $pdo,
         callable $createUser,
+        callable $updateUser,
         RowListInterface $getUsers,
         callable $countUsers,
         callable $findUsers,
@@ -62,11 +67,29 @@ final class UserQuery implements UserQueryInterface
     ) {
         $this->pdo = $pdo;
         $this->createUser = $createUser;
+        $this->updateUser = $updateUser;
         $this->getUsers = $getUsers;
         $this->countUsers = $countUsers;
         $this->findUsers = $findUsers;
         $this->getUser = $getUser;
         $this->deleteUser = $deleteUser;
+    }
+
+    /**
+     * @param array|iterable $array
+     *
+     * @return User
+     */
+    private function arrayToModel(array $array): User
+    {
+        $user = new User(
+            new UserId((int) $array['id']),
+            new UserName($array['username']),
+            new Email($array['email'])
+        );
+        $user->isNew(false);
+
+        return $user;
     }
 
     /**
@@ -80,11 +103,7 @@ final class UserQuery implements UserQueryInterface
             throw new UserNotFoundException(sprintf('user(id:%d) not found.', $id));
         }
 
-        return new User(
-            new UserId((int) $array['id']),
-            new UserName($array['username']),
-            new Email($array['email'])
-        );
+        return $this->arrayToModel($array);
     }
 
     /**
@@ -97,11 +116,7 @@ final class UserQuery implements UserQueryInterface
         $users = [];
 
         foreach ($all as $array) {
-            $users[] = new User(
-                new UserId((int) $array['id']),
-                new UserName($array['username']),
-                new Email($array['email'])
-            );
+            $users[] = $this->arrayToModel($array);
         }
 
         return $users;
@@ -123,11 +138,7 @@ final class UserQuery implements UserQueryInterface
         $generator = ($this->findUsers)($conditions, $options);
 
         foreach ($generator as $array) {
-            yield new User(
-                new UserId((int) $array['id']),
-                new UserName($array['username']),
-                new Email($array['email'])
-            );
+            yield $this->arrayToModel($array);
         }
     }
 
@@ -136,18 +147,32 @@ final class UserQuery implements UserQueryInterface
      */
     public function store(User $user) : User
     {
-        ($this->createUser)([
+        if ($user->isNew()) {
+            ($this->createUser)([
+                'username' => $user->getUserName()->val(),
+                'email' => $user->getEmail()->val()
+            ]);
+
+            $id = $this->pdo->lastInsertId('id');
+
+            return new User(
+                new UserId((int) $id),
+                $user->getUserName(),
+                $user->getEmail()
+            );
+        }
+
+        if ( ! $user->isDirty()) {
+            return $user;
+        }
+
+        ($this->updateUser)([
+            'id' => $user->getId()->val(),
             'username' => $user->getUserName()->val(),
             'email' => $user->getEmail()->val()
         ]);
 
-        $id = $this->pdo->lastInsertId('id');
-
-        return new User(
-            new UserId((int) $id),
-            $user->getUserName(),
-            $user->getEmail()
-        );
+        return $user;
     }
 
     /**
