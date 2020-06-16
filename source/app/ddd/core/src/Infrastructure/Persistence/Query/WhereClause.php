@@ -7,19 +7,19 @@ use Aura\SqlQuery\Common\WhereInterface;
 final class WhereClause
 {
     /** @var string */
-    public const OPERATION_IN = ':in';
+    private const OPERATION_IN = ':in';
 
     /** @var string */
-    public const OPERATION_NE = ':not';
+    private const OPERATION_NE = ':not';
 
     /** @var string */
-    public const OPERATION_LIKE = ':like';
+    private const OPERATION_LIKE = ':like';
 
     /** @var string */
-    public const OPERATION_GT = ':gt'; // >
+    private const OPERATION_GT = ':gt'; // >
 
     /** @var string */
-    public const OPERATION_LT = ':lt'; // <
+    private const OPERATION_LT = ':lt'; // <
 
     /** @var array */
     private $conditions;
