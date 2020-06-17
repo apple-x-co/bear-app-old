@@ -39,19 +39,18 @@ class Users extends ResourceObject
      */
     public function onGet() : ResourceObject
     {
-//        $users = $this->userQuery->all();
-        $users = $this->userQuery->find();
+        $generator = $this->userApplicationService->list();
 
-        $array = [];
-        foreach ($users as $user) {
-            $array[] = [
-                'id' => $user->getId()->val(),
-                'username' => $user->getUserName()->val(),
-                'email' => $user->getEmail()->val()
+        $users = [];
+        foreach ($generator as $user) {
+            $users[] = [
+                'id' => $user->getId(),
+                'username' => $user->getUserName(),
+                'email' => $user->getEmail()
             ];
         }
 
-        $this->body = ['users' => $array];
+        $this->body = ['users' => $users];
 
         return $this;
     }

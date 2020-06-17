@@ -8,6 +8,7 @@ use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserQueryInterface;
 use AppCore\Domain\Service\UserService;
+use Generator;
 
 // LCOM（Lack of Cohesion in Methods）の観点で、凝縮度を高くするために
 // UserRegisterService, UserDeleteService, UserUpdateService に分けることも可。
@@ -22,16 +23,38 @@ final class UserApplicationService
     /** @var UserService */
     private $userService;
 
+    /** @var UserQueryServiceInterface */
+    private $userQueryService;
+
     /**
      * UserApplicationService constructor.
      *
      * @param UserQueryInterface $userQuery
-     * @param UserService        $userService
+     * @param UserService $userService
+     * @param UserQueryServiceInterface $userQueryService
      */
-    public function __construct(UserQueryInterface $userQuery, UserService $userService)
+    public function __construct(
+        UserQueryInterface $userQuery,
+        UserService $userService,
+        UserQueryServiceInterface $userQueryService
+    ) {
+        $this->userQuery        = $userQuery;
+        $this->userService      = $userService;
+        $this->userQueryService = $userQueryService;
+    }
+
+    /**
+     * @return Generator
+     *
+     * 参照毎にメソッド・オブジェクトに分ける
+     */
+    public function list() : Generator
     {
-        $this->userQuery = $userQuery;
-        $this->userService = $userService;
+        $generator = $this->userQueryService->list();
+
+        foreach ($generator as $user) {
+            yield $user;
+        }
     }
 
     /**
