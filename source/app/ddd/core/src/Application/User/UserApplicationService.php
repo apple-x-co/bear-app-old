@@ -10,11 +10,6 @@ use AppCore\Domain\Model\User\UserQueryInterface;
 use AppCore\Domain\Service\UserService;
 use Generator;
 
-// LCOM（Lack of Cohesion in Methods）の観点で、凝縮度を高くするために
-// UserRegisterService, UserDeleteService, UserUpdateService に分けることも可。
-// その場合は、UserRegisterServiceInterface->handle などのインターフェースを用意する。
-// ※ ドメイン駆動設計入門 位置 2477
-
 final class UserApplicationService
 {
     /** @var UserQueryInterface */
@@ -45,8 +40,6 @@ final class UserApplicationService
 
     /**
      * @return Generator
-     *
-     * 参照毎にメソッド・オブジェクトに分ける
      */
     public function list() : Generator
     {

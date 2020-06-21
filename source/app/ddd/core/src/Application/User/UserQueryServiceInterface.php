@@ -4,8 +4,6 @@ namespace AppCore\Application\User;
 
 use Generator;
 
-// 参照毎にメソッド・オブジェクトに分ける
-
 interface UserQueryServiceInterface
 {
     /**

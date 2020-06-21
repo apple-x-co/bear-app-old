@@ -17,6 +17,59 @@ php bin/app.php get /
 php bin/app.php options /users
 ```
 
+## DDD structure
+
+### domain層
+
+ドメインモデル
+`AppCore\Domain\Model\User\User`
+
+値オブジェクト
+・・・値オブジェクトにする基準は以下の通り。該当しない場合はプリミティブ型（int,string,bool）にする
+　　　・ルールが存在しているか
+　　　・その値を単体で扱いたいか
+`AppCore\Domain\Model\User\UserId`
+`AppCore\Domain\Model\User\UserName`
+
+ドメインサービス（ルール・制約）
+・・・可能な限りドメインサービスのは避ける
+　　　エンティティや値ブジェクトに定義できるものであれば、そこに定義する
+　　　ドメインオブジェクトは、値オブジェクトやエンティティと同じ括りである。
+　　　ただし、ドメインに基づいているものであり、それを実現するサービスであれば、ドメインサービスである。
+`AppCore\Domain\Service\UserService`
+
+クエリーインターフェース（データの永続化・検索）
+`AppCore\Domain\Model\User\UserQueryInterface`
+
+### infrastructure層
+
+クエリー実装（データの永続化・検索）
+・・・データストアに合せた方法で実現
+`AppCore\Infrastructure\Persistence\Query\UserQuery`
+
+クエリーサービス実装（CQRS）
+・・・IFで定義された検索をデータストアに合せた方法で実現
+`AppCore\Infrastructure\Persistence\Query\UserQueryService`
+
+### application層
+
+参照系モデル（DTO）
+`AppCore\Domain\Model\User\User\UserData`
+
+クエリーサービスインターフェース（CQRS）
+・・・戻り値は参照系モデル（DTO）
+`AppCore\Application\User\UserQueryServiceInterface`
+
+アプリケーションサービス
+・・・LCOM（Lack of Cohesion in Methods）の観点で、凝縮度を高くするために
+　　　UserRegisterService, UserDeleteService, UserUpdateService に分けることも可。
+　　　その場合は、UserRegisterServiceInterface->handle などのインターフェースを用意する。
+　　　※ ドメイン駆動設計入門 位置 2477
+`AppCore\Application\User\UserApplicationService`
+
+ドメインモデル to 参照系モデル（DTO）
+`AppCore\Application\User\UserAssembler`
+
 ## Reference
 
 BEAR.Sunday, REST実装手順  
