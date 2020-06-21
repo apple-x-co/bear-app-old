@@ -25,6 +25,7 @@ class User extends ResourceObject
     {
         $this->userApplicationService = $userApplicationService;
     }
+
     /**
      * @param int $id
      *

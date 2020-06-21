@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
-
 namespace AppCore\Infrastructure\Persistence\Query;
 
 use AppCore\Application\User\UserAssembler;
-use AppCore\Application\User\UserData;
 use AppCore\Application\User\UserQueryServiceInterface;
 use AppCore\Domain\Model\User\UserQueryInterface;
 use Generator;
@@ -25,7 +23,7 @@ final class UserQueryService implements UserQueryServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function list() : Generator
     {

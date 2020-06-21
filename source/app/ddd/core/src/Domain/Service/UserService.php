@@ -4,7 +4,6 @@ namespace AppCore\Domain\Service;
 
 use AppCore\Domain\Model\User\User;
 use Ray\Di\Di\Named;
-use Ray\Query\Annotation\Query;
 use Ray\Query\RowInterface;
 
 // 可能な限りドメインサービスのは避ける

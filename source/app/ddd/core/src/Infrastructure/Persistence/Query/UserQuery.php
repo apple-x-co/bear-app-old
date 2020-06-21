@@ -76,23 +76,6 @@ final class UserQuery implements UserQueryInterface
     }
 
     /**
-     * @param array|iterable $array
-     *
-     * @return User
-     */
-    private function arrayToModel(array $array): User
-    {
-        $user = new User(
-            new UserId((int) $array['id']),
-            new UserName($array['username']),
-            new Email($array['email'])
-        );
-        $user->isNew(false);
-
-        return $user;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function get(int $id) : User
@@ -162,7 +145,7 @@ final class UserQuery implements UserQueryInterface
             );
         }
 
-        if ( ! $user->isDirty()) {
+        if (! $user->isDirty()) {
             return $user;
         }
 
@@ -183,5 +166,22 @@ final class UserQuery implements UserQueryInterface
         ($this->deleteUser)([
             'id' => $id
         ]);
+    }
+
+    /**
+     * @param array|iterable $array
+     *
+     * @return User
+     */
+    private function arrayToModel(array $array) : User
+    {
+        $user = new User(
+            new UserId((int) $array['id']),
+            new UserName($array['username']),
+            new Email($array['email'])
+        );
+        $user->isNew(false);
+
+        return $user;
     }
 }

@@ -29,8 +29,8 @@ final class UserApplicationService
     /**
      * UserApplicationService constructor.
      *
-     * @param UserQueryInterface $userQuery
-     * @param UserService $userService
+     * @param UserQueryInterface        $userQuery
+     * @param UserService               $userService
      * @param UserQueryServiceInterface $userQueryService
      */
     public function __construct(
@@ -38,8 +38,8 @@ final class UserApplicationService
         UserService $userService,
         UserQueryServiceInterface $userQueryService
     ) {
-        $this->userQuery        = $userQuery;
-        $this->userService      = $userService;
+        $this->userQuery = $userQuery;
+        $this->userService = $userService;
         $this->userQueryService = $userQueryService;
     }
 

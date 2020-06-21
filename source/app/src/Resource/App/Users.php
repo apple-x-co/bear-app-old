@@ -4,9 +4,6 @@ namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\UserApplicationService;
 use AppCore\Application\User\UserCreateCommand;
-use AppCore\Domain\Model\Email;
-use AppCore\Domain\Model\User\UserName;
-use AppCore\Domain\Model\User\UserQueryInterface;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
