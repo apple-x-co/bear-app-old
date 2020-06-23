@@ -6,6 +6,7 @@ use AppCore\Application\User\UserApplicationService;
 use AppCore\Application\User\UserCreateCommand;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
+use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
@@ -33,6 +34,7 @@ class Users extends ResourceObject
      * @return $this|ResourceObject
      *
      * @JsonSchema(schema="users.json")
+     * @Link(rel="create", href="/users", method="post")
      */
     public function onGet() : ResourceObject
     {
@@ -61,6 +63,7 @@ class Users extends ResourceObject
      * @JsonSchema(schema="user.json", params="users.json")
      * @Transactional()
      * @Purge(uri="app://self/users")
+     * @Link(rel="detail", href="/users/{id}")
      */
     public function onPost(
         string $username,
@@ -72,6 +75,8 @@ class Users extends ResourceObject
                 $email
             )
         );
+
+        $this->body['id'] = $user->getId();
 
         $this->code = StatusCode::CREATED;
         $this->headers[ResponseHeader::LOCATION] = '/users/' . $user->getId();

@@ -6,7 +6,9 @@ use AppCore\Application\User\UserApplicationService;
 use AppCore\Application\User\UserDeleteCommand;
 use AppCore\Application\User\UserGetCommand;
 use BEAR\Resource\Annotation\JsonSchema;
+use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
+use Koriym\HttpConstants\StatusCode;
 
 /**
  * Class User
@@ -32,6 +34,7 @@ class User extends ResourceObject
      * @return $this|ResourceObject
      *
      * @JsonSchema(schema="user.json")
+     * @Link(rel="delete", href="/users/{id}", method="delete")
      */
     public function onGet(int $id) : ResourceObject
     {
@@ -58,6 +61,8 @@ class User extends ResourceObject
         $this->userApplicationService->delete(
             new UserDeleteCommand($id)
         );
+
+        $this->code = StatusCode::NO_CONTENT;
 
         return $this;
     }
