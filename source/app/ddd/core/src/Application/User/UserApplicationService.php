@@ -75,9 +75,6 @@ final class UserApplicationService
             new Email($command->getEmail())
         );
 
-        var_dump(get_class($this->userService));
-        var_dump(get_class($this->userQuery));
-
         if ($this->userService->exists($user)) {
             throw new UserDuplicationException(sprintf('email : %s', $command->getEmail()));
         }
