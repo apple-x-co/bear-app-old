@@ -2,9 +2,10 @@
 declare(strict_types=1);
 namespace MyVendor\MyProject\Module;
 
-use josegonzalez\Dotenv\Loader;
-use Ray\AuraSqlModule\AuraSqlModule;
+use AppCore\Domain\Model\User\UserQueryInterface;
+use AppCore\Infrastructure\Persistence\Query\FakeUserQuery;
 use Ray\Di\AbstractModule;
+use Ray\Di\Scope;
 
 final class TestModule extends AbstractModule
 {
@@ -13,18 +14,6 @@ final class TestModule extends AbstractModule
      */
     protected function configure()
     {
-        $env = dirname(__DIR__, 2) . '/.env';
-        if (file_exists($env)) {
-            (new Loader($env))->parse()->putenv(true);
-        }
-
-        $this->install(
-            new AuraSqlModule(
-                getenv('APP_DB_DNS'),
-                getenv('APP_DB_USER'),
-                getenv('APP_DB_PASS'),
-                getenv('APP_SLAVE_DB_HOSTS')
-            )
-        );
+        $this->bind(UserQueryInterface::class)->to(FakeUserQuery::class)->in(Scope::SINGLETON);
     }
 }

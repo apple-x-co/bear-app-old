@@ -50,6 +50,7 @@ class AppModule extends AbstractAppModule
         // DDD
         $this->install(new DddCoreModule());
 
+        // BEAR.Package
         $this->install(new PackageModule);
     }
 }
