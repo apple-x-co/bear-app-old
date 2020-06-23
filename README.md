@@ -8,6 +8,7 @@
 composer create-project -n bear/skeleton app
 composer require bear/aura-router-module ray/query-module
 composer setup
+./vendor/bin/psalm --init
 ```
 
 ## API structure
@@ -15,6 +16,13 @@ composer setup
 ```bash
 php bin/app.php get /
 php bin/app.php options /users
+```
+
+## QA
+
+```bash
+composer run-script test
+composer run-script tests
 ```
 
 ## DDD structure

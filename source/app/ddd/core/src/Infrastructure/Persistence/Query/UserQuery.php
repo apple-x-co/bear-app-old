@@ -139,7 +139,7 @@ final class UserQuery implements UserQueryInterface
             $id = $this->pdo->lastInsertId('id');
 
             return new User(
-                new UserId((int) $id),
+                new UserId($id),
                 $user->getUserName(),
                 $user->getEmail()
             );

@@ -81,7 +81,7 @@ final class FakeUserQuery implements UserQueryInterface
     }
 
     /**
-     * @param array|iterable $array
+     * @param array $array
      *
      * @return User
      */
