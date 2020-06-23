@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
 
 final class UserCreateCommand
 {
@@ -21,13 +19,13 @@ final class UserCreateCommand
     public function __construct(string $userName, string $email)
     {
         $this->userName = $userName;
-        $this->email    = $email;
+        $this->email = $email;
     }
 
     /**
      * @return string
      */
-    public function getUserName(): string
+    public function getUserName() : string
     {
         return $this->userName;
     }
@@ -35,7 +33,7 @@ final class UserCreateCommand
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail() : string
     {
         return $this->email;
     }

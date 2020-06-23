@@ -1,8 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Domain\Model;
-
 
 trait ModelTrait
 {
@@ -17,7 +15,7 @@ trait ModelTrait
      *
      * @return bool
      */
-    public function isNew(?bool $new = null): bool
+    public function isNew(?bool $new = null) : bool
     {
         if ($new === null) {
             return $this->new;
@@ -29,7 +27,7 @@ trait ModelTrait
     /**
      * @return bool
      */
-    public function isDirty(): bool
+    public function isDirty() : bool
     {
         return ! empty($this->dirties);
     }
@@ -37,7 +35,7 @@ trait ModelTrait
     /**
      * @param string $property_name
      */
-    public function setDirtyProperty(string $property_name): void
+    public function setDirtyProperty(string $property_name) : void
     {
         $this->dirties[$property_name] = true;
     }

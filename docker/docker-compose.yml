@@ -9,10 +9,26 @@ services:
       - bear-source:/var/www/vhosts/bear:rw
       - ./vhosts.conf:/etc/httpd/conf.d/vhosts.conf
     ports:
-      - '8000:80'
+      - '80:80'
+    depends_on:
+      - db
     environment:
       - PHP_XDEBUG=off
       - COMPOSER_ALLOW_SUPERUSER=1
+
+  db:
+    image: buddyingdevelopment/mysql:5.7
+    container_name: bear-db
+    volumes:
+      - ./.db:/var/lib/mysql:delegated
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=passw0rd
+      - MYSQL_DATABASE=bear_db
+      - MYSQL_USER=bear
+      - MYSQL_PASSWORD=passw0rd
+      - TZ=Asia/Tokyo
 
 volumes:
   bear-source:

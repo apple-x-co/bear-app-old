@@ -1,11 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
+namespace AppCore\Infrastructure\Persistence\Query;
 
-
-namespace AppCore\Infrastructure\Persistence\Pdo;
-
-
-use Aura\SqlQuery\Common\SelectInterface;
 use AppCore\Infrastructure\OrderBy;
+use Aura\SqlQuery\Common\SelectInterface;
 
 final class OrderClause
 {
@@ -32,12 +30,11 @@ final class OrderClause
      *
      * @return SelectInterface
      */
-    public function __invoke(SelectInterface $order): SelectInterface
+    public function __invoke(SelectInterface $order) : SelectInterface
     {
         if (isset($this->options['order'])) {
             $order_by = [];
             foreach ($this->options['order'] as $orderBy) {
-
                 /** @var OrderBy $orderBy */
                 $column_name = $orderBy->getColumnName();
 

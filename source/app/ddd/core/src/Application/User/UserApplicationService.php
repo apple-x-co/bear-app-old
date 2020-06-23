@@ -1,40 +1,53 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
 
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserDuplicationException;
-use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserName;
-use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\Domain\Service\UserService;
-
-// LCOM（Lack of Cohesion in Methods）の観点で、凝縮度を高くするために
-// UserRegisterService, UserDeleteService, UserUpdateService に分けることも可。
-// その場合は、UserRegisterServiceInterface->handle などのインターフェースを用意する。
-// ※ ドメイン駆動設計入門 位置 2477
+use AppCore\Domain\Model\User\UserQueryInterface;
+use AppCore\Domain\Service\UserServiceInterface;
+use Generator;
 
 final class UserApplicationService
 {
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    /** @var UserQueryInterface */
+    private $userQuery;
 
-    /** @var UserService */
+    /** @var UserServiceInterface */
     private $userService;
+
+    /** @var UserQueryServiceInterface */
+    private $userQueryService;
 
     /**
      * UserApplicationService constructor.
      *
-     * @param UserRepositoryInterface $userRepository
-     * @param UserService $userService
+     * @param UserQueryInterface        $userQuery
+     * @param UserServiceInterface      $userService
+     * @param UserQueryServiceInterface $userQueryService
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserService $userService)
+    public function __construct(
+        UserQueryInterface $userQuery,
+        UserServiceInterface $userService,
+        UserQueryServiceInterface $userQueryService
+    ) {
+        $this->userQuery = $userQuery;
+        $this->userService = $userService;
+        $this->userQueryService = $userQueryService;
+    }
+
+    /**
+     * @return Generator
+     */
+    public function list() : Generator
     {
-        $this->userRepository = $userRepository;
-        $this->userService    = $userService;
+        $generator = $this->userQueryService->list();
+
+        foreach ($generator as $user) {
+            yield $user;
+        }
     }
 
     /**
@@ -42,17 +55,19 @@ final class UserApplicationService
      *
      * @return UserData
      */
-    public function get(UserGetCommand $command): UserData
+    public function get(UserGetCommand $command) : UserData
     {
-        $user = $this->userRepository->get($command->getId());
+        $user = $this->userQuery->get($command->getId());
 
         return (new UserAssembler())->toDto($user);
     }
 
     /**
      * @param UserCreateCommand $command
+     *
+     * @return UserData
      */
-    public function create(UserCreateCommand $command): void
+    public function create(UserCreateCommand $command) : UserData
     {
         $user = new User(
             null,
@@ -61,26 +76,23 @@ final class UserApplicationService
         );
 
         if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
+            throw new UserDuplicationException(sprintf('email : %s', $command->getEmail()));
         }
 
-        $this->userRepository->store($user);
+        $user = $this->userQuery->store($user);
+
+        return (new UserAssembler())->toDto($user);
     }
 
     /**
      * @param UserUpdateCommand $command
      */
-    public function update(UserUpdateCommand $command): void
+    public function update(UserUpdateCommand $command) : void
     {
-        $user = $this->userRepository->one([
-            'id' => $command->getId()
-        ]);
-        if ($user === null) {
-            throw new UserNotFoundException(sprintf('id : %d', $command->getId()));
-        }
+        $user = $this->userQuery->get($command->getId());
 
         if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
+            throw new UserDuplicationException(sprintf('email : %s', (string) $user->getEmail()));
         }
 
         if ($command->getUserName() !== null) {
@@ -89,20 +101,17 @@ final class UserApplicationService
         if ($command->getEmail() !== null) {
             $user->changeEmail(new Email($command->getEmail()));
         }
+
+        $this->userQuery->store($user);
     }
 
     /**
      * @param UserDeleteCommand $command
      */
-    public function delete(UserDeleteCommand $command): void
+    public function delete(UserDeleteCommand $command) : void
     {
-        $user = $this->userRepository->one([
-            'id' => $command->getId()
-        ]);
-        if ($user === null) {
-            throw new UserNotFoundException(sprintf('id : %d', $command->getId()));
-        }
+        $user = $this->userQuery->get($command->getId());
 
-        $this->userRepository->remove($user);
+        $this->userQuery->delete($user->getId()->val());
     }
 }

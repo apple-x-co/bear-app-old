@@ -14,7 +14,7 @@ class IndexTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->resource = (new AppInjector('MyVendor\MyProject', 'app'))->getInstance(ResourceInterface::class);
+        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-app'))->getInstance(ResourceInterface::class);
     }
 
     public function testOnGet()

@@ -1,10 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Domain\Model\User;
-
-
-use phpDocumentor\Reflection\Types\This;
 
 final class UserId
 {
@@ -23,7 +19,7 @@ final class UserId
     /**
      * @return int
      */
-    public function val(): int
+    public function val() : int
     {
         return $this->value;
     }

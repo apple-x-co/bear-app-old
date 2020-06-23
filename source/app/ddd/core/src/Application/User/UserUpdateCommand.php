@@ -1,11 +1,6 @@
-<?php declare(strict_types=1);
-
-
+<?php
+declare(strict_types=1);
 namespace AppCore\Application\User;
-
-
-use AppCore\Domain\Model\Email;
-use AppCore\Domain\Model\User\UserName;
 
 final class UserUpdateCommand
 {
@@ -21,21 +16,21 @@ final class UserUpdateCommand
     /**
      * UserUpdateCommand constructor.
      *
-     * @param int $id
+     * @param int         $id
      * @param string|null $userName
      * @param string|null $email
      */
     public function __construct(int $id, ?string $userName, ?string $email)
     {
-        $this->id       = $id;
+        $this->id = $id;
         $this->userName = $userName;
-        $this->email    = $email;
+        $this->email = $email;
     }
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId() : int
     {
         return $this->id;
     }
@@ -43,7 +38,7 @@ final class UserUpdateCommand
     /**
      * @return string|null
      */
-    public function getUserName(): ?string
+    public function getUserName() : ?string
     {
         return $this->userName;
     }
@@ -51,7 +46,7 @@ final class UserUpdateCommand
     /**
      * @return string|null
      */
-    public function getEmail(): ?string
+    public function getEmail() : ?string
     {
         return $this->email;
     }

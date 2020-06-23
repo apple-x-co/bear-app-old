@@ -1,27 +1,25 @@
-<?php declare(strict_types=1);
-
-
-namespace AppCore\Infrastructure\Persistence\Pdo;
-
+<?php
+declare(strict_types=1);
+namespace AppCore\Infrastructure\Persistence\Query;
 
 use Aura\SqlQuery\Common\WhereInterface;
 
 final class WhereClause
 {
     /** @var string */
-    public const OPERATION_IN = ':in';
+    private const OPERATION_IN = ':in';
 
     /** @var string */
-    public const OPERATION_NE = ':not';
+    private const OPERATION_NE = ':not';
 
     /** @var string */
-    public const OPERATION_LIKE = ':like';
+    private const OPERATION_LIKE = ':like';
 
     /** @var string */
-    public const OPERATION_GT = ':gt'; // >
+    private const OPERATION_GT = ':gt'; // >
 
     /** @var string */
-    public const OPERATION_LT = ':lt'; // <
+    private const OPERATION_LT = ':lt'; // <
 
     /** @var array */
     private $conditions;
@@ -38,7 +36,7 @@ final class WhereClause
     public function __construct(array $conditions, array $aliases = [])
     {
         $this->conditions = $conditions;
-        $this->aliases    = $aliases;
+        $this->aliases = $aliases;
     }
 
     /**
@@ -96,7 +94,7 @@ final class WhereClause
      *
      * @return array
      */
-    private function splitColumnOperator(string $column_name): array
+    private function splitColumnOperator(string $column_name) : array
     {
         if (substr($column_name, -3) === self::OPERATION_IN) {
             return ['IN', substr($column_name, 0, strpos($column_name, self::OPERATION_IN))];
