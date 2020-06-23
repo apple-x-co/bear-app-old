@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
-namespace AppCore\Domain\Service;
+namespace AppCore\Infrastructure\Service;
 
 use AppCore\Domain\Model\User\User;
+use AppCore\Domain\Service\UserServiceInterface;
 use Ray\Di\Di\Named;
 use Ray\Query\RowInterface;
 
-final class UserService
+final class UserService implements UserServiceInterface
 {
     /** @var RowInterface */
     private $getUser;

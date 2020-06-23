@@ -7,7 +7,7 @@ use AppCore\Domain\Model\User\Exception\UserDuplicationException;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserQueryInterface;
-use AppCore\Domain\Service\UserService;
+use AppCore\Domain\Service\UserServiceInterface;
 use Generator;
 
 final class UserApplicationService
@@ -15,7 +15,7 @@ final class UserApplicationService
     /** @var UserQueryInterface */
     private $userQuery;
 
-    /** @var UserService */
+    /** @var UserServiceInterface */
     private $userService;
 
     /** @var UserQueryServiceInterface */
@@ -25,12 +25,12 @@ final class UserApplicationService
      * UserApplicationService constructor.
      *
      * @param UserQueryInterface        $userQuery
-     * @param UserService               $userService
+     * @param UserServiceInterface      $userService
      * @param UserQueryServiceInterface $userQueryService
      */
     public function __construct(
         UserQueryInterface $userQuery,
-        UserService $userService,
+        UserServiceInterface $userService,
         UserQueryServiceInterface $userQueryService
     ) {
         $this->userQuery = $userQuery;
