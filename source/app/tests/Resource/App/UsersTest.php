@@ -14,7 +14,7 @@ final class UsersTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-app'))->getInstance(ResourceInterface::class);
+        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-api-app'))->getInstance(ResourceInterface::class);
     }
 
     public function testOnGet() : void
