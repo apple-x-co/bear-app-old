@@ -15,13 +15,11 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - cd $HOME/source/app
+  - cd source/app
   - composer self-update
 
 install:
-  - cd $HOME/source/app
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
 script:
-  - cd $HOME/source/app
   - ./vendor/bin/phpunit;
