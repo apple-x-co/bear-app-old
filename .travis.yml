@@ -14,7 +14,15 @@ cache:
     - source/app/vendor
     - $HOME/.composer/cache
 
-before_script:
+env:
+  - APP_DB_HOST=xxx
+  - APP_DB_NAME=xxx
+  - APP_DB_USER=xxx
+  - APP_DB_PASS=xxx
+  - APP_DB_DNS=mysql:host=${APP_DB_HOST};dbname=${APP_DB_NAME}
+  - APP_SLAVE_DB_HOSTS=xxx
+
+before_install:
   - composer self-update
 
 install:
