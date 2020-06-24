@@ -15,10 +15,10 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - cd source/app
   - composer self-update
 
 install:
+  - cd source/app
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
 script:
