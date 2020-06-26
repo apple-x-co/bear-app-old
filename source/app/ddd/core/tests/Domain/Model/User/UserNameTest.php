@@ -10,6 +10,6 @@ final class UserNameTest extends TestCase
     public function testUserName() : void
     {
         $userName = new UserName('bear');
-        $this->assertEquals('bear', $userName->val());
+        $this->assertSame('bear', $userName->val());
     }
 }

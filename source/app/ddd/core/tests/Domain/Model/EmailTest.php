@@ -10,6 +10,6 @@ final class EmailTest extends TestCase
     public function testEmail() : void
     {
         $email = new Email('bear@example.com');
-        $this->assertEquals('bear@example.com', $email->val());
+        $this->assertSame('bear@example.com', $email->val());
     }
 }

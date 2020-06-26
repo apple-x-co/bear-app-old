@@ -10,6 +10,6 @@ final class UserIdTest extends TestCase
     public function testUserId() : void
     {
         $userId = new UserId(1);
-        $this->assertEquals(1, $userId->val());
+        $this->assertSame(1, $userId->val());
     }
 }

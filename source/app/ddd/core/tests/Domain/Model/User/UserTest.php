@@ -17,8 +17,8 @@ final class UserTest extends TestCase
             new UserName('bear'),
             new Email('bear@example.com')
         );
-        $this->assertEquals('bear', $user->getUserName()->val());
-        $this->assertEquals('bear@example.com', $user->getEmail()->val());
+        $this->assertSame('bear', $user->getUserName()->val());
+        $this->assertSame('bear@example.com', $user->getEmail()->val());
     }
 
     public function testExistsUser() : void
@@ -28,9 +28,9 @@ final class UserTest extends TestCase
             new UserName('bear'),
             new Email('bear@example.com')
         );
-        $this->assertEquals(1, $user->getId()->val());
-        $this->assertEquals('bear', $user->getUserName()->val());
-        $this->assertEquals('bear@example.com', $user->getEmail()->val());
+        $this->assertSame(1, $user->getId()->val());
+        $this->assertSame('bear', $user->getUserName()->val());
+        $this->assertSame('bear@example.com', $user->getEmail()->val());
     }
 
     public function testChangeName() : void
@@ -42,7 +42,7 @@ final class UserTest extends TestCase
         );
 
         $user->changeUserName(new UserName('BEAR'));
-        $this->assertEquals('BEAR', $user->getUserName()->val());
+        $this->assertSame('BEAR', $user->getUserName()->val());
     }
 
     public function testChangeEmail() : void
@@ -54,6 +54,6 @@ final class UserTest extends TestCase
         );
 
         $user->changeEmail(new Email('bear.sunday@example.com'));
-        $this->assertEquals('bear.sunday@example.com', $user->getEmail()->val());
+        $this->assertSame('bear.sunday@example.com', $user->getEmail()->val());
     }
 }
