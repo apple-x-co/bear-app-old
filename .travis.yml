@@ -26,4 +26,4 @@ install:
 
 script:
 #  - ./vendor/bin/phpunit;
-  - composer composer run-script tests
+  - composer run-script tests
