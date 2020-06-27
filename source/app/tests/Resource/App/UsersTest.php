@@ -15,13 +15,10 @@ final class UsersTest extends TestCase
 
     protected function setUp() : void
     {
-        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-api-app'))->getInstance(ResourceInterface::class);
-    }
-
-    public function testOnGet() : void
-    {
-        $ro = $this->resource->get('app://self/users');
-        $this->assertSame(StatusCode::OK, $ro->code);
+        $this->resource = (new AppInjector(
+            'MyVendor\MyProject',
+            'test-hal-api-app'
+        ))->getInstance(ResourceInterface::class);
     }
 
     public function testOnPost() : void
@@ -32,5 +29,14 @@ final class UsersTest extends TestCase
         ]);
         $this->assertSame(StatusCode::CREATED, $ro->code);
         $this->assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
+    }
+
+    /**
+     * @depends testOnPost
+     */
+    public function testOnGet() : void
+    {
+        $ro = $this->resource->get('app://self/users');
+        $this->assertSame(StatusCode::OK, $ro->code);
     }
 }

@@ -4,6 +4,7 @@ namespace MyVendor\MyProject\Resource\App;
 
 use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
+use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 use PHPUnit\Framework\TestCase;
 
@@ -17,18 +18,30 @@ final class UserTest extends TestCase
         $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-api-app'))->getInstance(ResourceInterface::class);
     }
 
-    public function testOnGet() : void
+    public function testOnGet() : ResourceObject
     {
+        $ro = $this->resource->post('app://self/users', [
+            'username' => 'bear',
+            'email' => 'bear@example.com'
+        ]);
+
         $ro = $this->resource->get('app://self/user', [
-            'id' => 1
+            'id' => $ro->body['id']
         ]);
         $this->assertSame(StatusCode::OK, $ro->code);
+
+        return $ro;
     }
 
-    public function testOnDelete() : void
+    /**
+     * @param ResourceObject $ro
+     *
+     * @depends testOnGet
+     */
+    public function testOnDelete(ResourceObject $ro) : void
     {
         $ro = $this->resource->delete('app://self/user', [
-            'id' => 1
+            'id' => $ro->body['id']
         ]);
         $this->assertSame(StatusCode::NO_CONTENT, $ro->code);
     }
