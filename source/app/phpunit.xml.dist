@@ -2,7 +2,7 @@
     <testsuites>
         <testsuite name="Resource Tests">
             <directory suffix="Test.php">tests</directory>
-<!--            <directory suffix="Test.php">ddd/core/tests</directory>-->
+            <directory suffix="Test.php">ddd/core/tests</directory>
         </testsuite>
     </testsuites>
     <php>
