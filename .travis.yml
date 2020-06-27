@@ -25,4 +25,5 @@ install:
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
 script:
-  - ./vendor/bin/phpunit;
+#  - ./vendor/bin/phpunit;
+  - composer composer run-script tests
