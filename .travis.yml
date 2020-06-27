@@ -23,6 +23,7 @@ before_install:
 install:
   - cd source/app
   - composer install --prefer-dist --no-progress --no-suggest --no-interaction
+  - composer dump-autoload
 
 script:
 #  - ./vendor/bin/phpunit;
