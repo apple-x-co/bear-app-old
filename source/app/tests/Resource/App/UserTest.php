@@ -30,6 +30,10 @@ final class UserTest extends TestCase
         ]);
         $this->assertSame(StatusCode::OK, $ro->code);
 
+        $json = (string) $ro;
+        $href = \GuzzleHttp\json_decode($json)->_links->{'delete'}->href;
+        $this->assertNotEmpty($href);
+
         return $ro;
     }
 

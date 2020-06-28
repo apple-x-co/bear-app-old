@@ -29,6 +29,10 @@ final class UsersTest extends TestCase
         ]);
         $this->assertSame(StatusCode::CREATED, $ro->code);
         $this->assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
+
+        $json = (string) $ro;
+        $href = \GuzzleHttp\json_decode($json)->_links->{'detail'}->href;
+        $this->assertNotEmpty($href);
     }
 
     /**
@@ -38,5 +42,9 @@ final class UsersTest extends TestCase
     {
         $ro = $this->resource->get('app://self/users');
         $this->assertSame(StatusCode::OK, $ro->code);
+
+        $json = (string) $ro;
+        $href = \GuzzleHttp\json_decode($json)->_links->{'create'}->href;
+        $this->assertNotEmpty($href);
     }
 }
