@@ -234,16 +234,16 @@
         },
         {
             "name": "bear/app-meta",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.AppMeta.git",
-                "reference": "01842581e63991472ec775a04ea413dec1bfaae6"
+                "reference": "4971742b8a99da5cc6f0bb3f4d3011b389e4e002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.AppMeta/zipball/01842581e63991472ec775a04ea413dec1bfaae6",
-                "reference": "01842581e63991472ec775a04ea413dec1bfaae6",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.AppMeta/zipball/4971742b8a99da5cc6f0bb3f4d3011b389e4e002",
+                "reference": "4971742b8a99da5cc6f0bb3f4d3011b389e4e002",
                 "shasum": ""
             },
             "require": {
@@ -271,7 +271,7 @@
             "keywords": [
                 "BEAR.Sunday"
             ],
-            "time": "2020-05-27T07:37:26+00:00"
+            "time": "2020-06-23T03:59:23+00:00"
         },
         {
             "name": "bear/aura-router-module",
@@ -437,16 +437,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "1.14.4",
+            "version": "1.14.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.Resource.git",
-                "reference": "4922aed7be7ffdcff08a19015353714442851606"
+                "reference": "99e0e9f4b965bddc9e930b7409a259da4447bafe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.Resource/zipball/4922aed7be7ffdcff08a19015353714442851606",
-                "reference": "4922aed7be7ffdcff08a19015353714442851606",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.Resource/zipball/99e0e9f4b965bddc9e930b7409a259da4447bafe",
+                "reference": "99e0e9f4b965bddc9e930b7409a259da4447bafe",
                 "shasum": ""
             },
             "require": {
@@ -502,7 +502,7 @@
                 "protocol",
                 "rest"
             ],
-            "time": "2020-06-21T00:54:20+00:00"
+            "time": "2020-06-24T17:10:31+00:00"
         },
         {
             "name": "bear/streamer",
@@ -551,16 +551,16 @@
         },
         {
             "name": "bear/sunday",
-            "version": "1.4.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.Sunday.git",
-                "reference": "1264e2b4aa900d446d1c23b0290d756a0a278b78"
+                "reference": "55c39de638bd80826619a679c758417ea4d0511e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.Sunday/zipball/1264e2b4aa900d446d1c23b0290d756a0a278b78",
-                "reference": "1264e2b4aa900d446d1c23b0290d756a0a278b78",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.Sunday/zipball/55c39de638bd80826619a679c758417ea4d0511e",
+                "reference": "55c39de638bd80826619a679c758417ea4d0511e",
                 "shasum": ""
             },
             "require": {
@@ -604,7 +604,7 @@
                 "hypermedia",
                 "rest"
             ],
-            "time": "2020-06-21T15:36:45+00:00"
+            "time": "2020-06-27T07:31:51+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1107,6 +1107,56 @@
                 "http"
             ],
             "time": "2019-08-30T14:19:11+00:00"
+        },
+        {
+            "name": "koriym/printo",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/koriym/print_o.git",
+                "reference": "d969e4cc738a376d479c2125e7d62be88cfa9dbe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/koriym/print_o/zipball/d969e4cc738a376d479c2125e7d62be88cfa9dbe",
+                "reference": "d969e4cc738a376d479c2125e7d62be88cfa9dbe",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Koriym\\Printo\\": "src/"
+                },
+                "files": [
+                    "src/print_o.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akihito Koriyama",
+                    "email": "akihito.koriyama@gmail.com",
+                    "homepage": "https://github.com/koriym"
+                }
+            ],
+            "description": "An object graph visualizer.",
+            "homepage": "https://github.com/koriym/print_o",
+            "keywords": [
+                "debug",
+                "var_dump"
+            ],
+            "time": "2015-02-13T19:04:21+00:00"
         },
         {
             "name": "koriym/psr4list",
@@ -1673,25 +1723,25 @@
         },
         {
             "name": "phpdocumentor/reflection-common",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "6568f4687e5b41b054365f9ae03fcb1ed5f2069b"
+                "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/6568f4687e5b41b054365f9ae03fcb1ed5f2069b",
-                "reference": "6568f4687e5b41b054365f9ae03fcb1ed5f2069b",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/1d01c49d4ed62f25aa84a747ad35d5a16924662b",
+                "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-2.x": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1718,7 +1768,7 @@
                 "reflection",
                 "static analysis"
             ],
-            "time": "2020-04-27T09:25:28+00:00"
+            "time": "2020-06-27T09:03:43+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -1774,25 +1824,24 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "30441f2752e493c639526b215ed81d54f369d693"
+                "reference": "e878a14a65245fbe78f8080eba03b47c3b705651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/30441f2752e493c639526b215ed81d54f369d693",
-                "reference": "30441f2752e493c639526b215ed81d54f369d693",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e878a14a65245fbe78f8080eba03b47c3b705651",
+                "reference": "e878a14a65245fbe78f8080eba03b47c3b705651",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": "^7.2 || ^8.0",
                 "phpdocumentor/reflection-common": "^2.0"
             },
             "require-dev": {
-                "ext-tokenizer": "^7.2",
-                "mockery/mockery": "~1"
+                "ext-tokenizer": "*"
             },
             "type": "library",
             "extra": {
@@ -1816,7 +1865,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2020-06-19T20:22:09+00:00"
+            "time": "2020-06-27T10:12:23+00:00"
         },
         {
             "name": "psr/container",
@@ -2107,27 +2156,32 @@
         },
         {
             "name": "ray/compiler",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ray-di/Ray.Compiler.git",
-                "reference": "e8204d14de5be14161f47d44a228b78cb46643e4"
+                "reference": "631d722d2b19b2222e6705324b260c9dc09fd94c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ray-di/Ray.Compiler/zipball/e8204d14de5be14161f47d44a228b78cb46643e4",
-                "reference": "e8204d14de5be14161f47d44a228b78cb46643e4",
+                "url": "https://api.github.com/repos/ray-di/Ray.Compiler/zipball/631d722d2b19b2222e6705324b260c9dc09fd94c",
+                "reference": "631d722d2b19b2222e6705324b260c9dc09fd94c",
                 "shasum": ""
             },
             "require": {
+                "doctrine/annotations": "^1.10",
                 "doctrine/cache": "^1.10",
-                "php": ">=7.2.0"
+                "koriym/printo": "^1.0",
+                "nikic/php-parser": "^4.5",
+                "php": ">=7.2.0",
+                "ray/aop": "^2.9",
+                "ray/di": "^2.10.3 || 2.x-dev"
+            },
+            "replace": {
+                "ray/compiler": "self.version"
             },
             "require-dev": {
-                "koriym/printo": "^1.0",
-                "phpunit/phpunit": "^7.5",
-                "ray/aop": "^2.9.8",
-                "ray/di": "2.x-dev"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "autoload": {
@@ -2151,7 +2205,7 @@
                 "compiler",
                 "di"
             ],
-            "time": "2020-06-13T17:30:09+00:00"
+            "time": "2020-06-23T06:08:42+00:00"
         },
         {
             "name": "ray/di",
@@ -3383,16 +3437,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.16.3",
+            "version": "v2.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "83baf823a33a1cbd5416c8626935cf3f843c10b0"
+                "reference": "1023c3458137ab052f6ff1e09621a721bfdeca13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/83baf823a33a1cbd5416c8626935cf3f843c10b0",
-                "reference": "83baf823a33a1cbd5416c8626935cf3f843c10b0",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/1023c3458137ab052f6ff1e09621a721bfdeca13",
+                "reference": "1023c3458137ab052f6ff1e09621a721bfdeca13",
                 "shasum": ""
             },
             "require": {
@@ -3424,12 +3478,12 @@
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.1",
                 "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.1",
                 "phpunitgoodpractices/traits": "^1.8",
-                "symfony/phpunit-bridge": "^4.3 || ^5.0",
+                "symfony/phpunit-bridge": "^5.1",
                 "symfony/yaml": "^3.0 || ^4.0 || ^5.0"
             },
             "suggest": {
                 "ext-dom": "For handling output formats in XML",
-                "ext-mbstring": "For handling non-UTF8 characters in cache signature.",
+                "ext-mbstring": "For handling non-UTF8 characters.",
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "For IsIdenticalString constraint.",
                 "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "For XmlMatchesXsd constraint.",
                 "symfony/polyfill-mbstring": "When enabling `ext-mbstring` is not possible."
@@ -3470,7 +3524,13 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2020-04-15T18:51:10+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/keradus",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-06-27T23:57:46+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
@@ -4201,16 +4261,16 @@
         },
         {
             "name": "phpmetrics/phpmetrics",
-            "version": "v2.6.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmetrics/PhpMetrics.git",
-                "reference": "67ac2cea23c6f9c5bdfd1c98fc0e55eef16ef59d"
+                "reference": "52e52f29f951e9c73faab5ed4080984a9159bcc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmetrics/PhpMetrics/zipball/67ac2cea23c6f9c5bdfd1c98fc0e55eef16ef59d",
-                "reference": "67ac2cea23c6f9c5bdfd1c98fc0e55eef16ef59d",
+                "url": "https://api.github.com/repos/phpmetrics/PhpMetrics/zipball/52e52f29f951e9c73faab5ed4080984a9159bcc6",
+                "reference": "52e52f29f951e9c73faab5ed4080984a9159bcc6",
                 "shasum": ""
             },
             "require": {
@@ -4260,7 +4320,7 @@
                 "quality",
                 "testing"
             ],
-            "time": "2020-04-02T20:22:19+00:00"
+            "time": "2020-06-27T13:22:12+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -4327,16 +4387,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.30",
+            "version": "0.12.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "1f2c16d3fbb5eec6e55fbe2358e32570cefa20e5"
+                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1f2c16d3fbb5eec6e55fbe2358e32570cefa20e5",
-                "reference": "1f2c16d3fbb5eec6e55fbe2358e32570cefa20e5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/776c8056b401e1b67f277b9e9fb334d1a274671d",
+                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d",
                 "shasum": ""
             },
             "require": {
@@ -4365,7 +4425,21 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-06-21T14:08:19+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/phpstan",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-24T20:55:29+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6893,5 +6967,6 @@
     "platform": {
         "php": ">=7.2.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

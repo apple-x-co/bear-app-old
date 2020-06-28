@@ -133,13 +133,15 @@ final class UserQuery implements UserQueryInterface
         if ($user->isNew()) {
             ($this->createUser)([
                 'username' => $user->getUserName()->val(),
-                'email' => $user->getEmail()->val()
+                'email' => $user->getEmail()->val(),
+                'created_at' => (new \DateTimeImmutable())->format('Y-m-d H:i:s'),
+                'updated_at' => (new \DateTimeImmutable())->format('Y-m-d H:i:s')
             ]);
 
             $id = $this->pdo->lastInsertId('id');
 
             return new User(
-                new UserId($id),
+                new UserId((int) $id),
                 $user->getUserName(),
                 $user->getEmail()
             );
@@ -152,7 +154,8 @@ final class UserQuery implements UserQueryInterface
         ($this->updateUser)([
             'id' => $user->getId()->val(),
             'username' => $user->getUserName()->val(),
-            'email' => $user->getEmail()->val()
+            'email' => $user->getEmail()->val(),
+            'updated_at' => (new \DateTimeImmutable())->format('Y-m-d H:i:s')
         ]);
 
         return $user;

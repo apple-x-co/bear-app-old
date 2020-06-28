@@ -18,12 +18,6 @@ final class UsersTest extends TestCase
         $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-api-app'))->getInstance(ResourceInterface::class);
     }
 
-    public function testOnGet() : void
-    {
-        $ro = $this->resource->get('app://self/users');
-        $this->assertSame(StatusCode::OK, $ro->code);
-    }
-
     public function testOnPost() : void
     {
         $ro = $this->resource->post('app://self/users', [
@@ -32,5 +26,22 @@ final class UsersTest extends TestCase
         ]);
         $this->assertSame(StatusCode::CREATED, $ro->code);
         $this->assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
+
+        $json = (string) $ro;
+        $href = \GuzzleHttp\json_decode($json)->_links->{'detail'}->href;
+        $this->assertNotEmpty($href);
+    }
+
+    /**
+     * @depends testOnPost
+     */
+    public function testOnGet() : void
+    {
+        $ro = $this->resource->get('app://self/users');
+        $this->assertSame(StatusCode::OK, $ro->code);
+
+        $json = (string) $ro;
+        $href = \GuzzleHttp\json_decode($json)->_links->{'create'}->href;
+        $this->assertNotEmpty($href);
     }
 }
