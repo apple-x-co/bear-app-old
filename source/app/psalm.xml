@@ -4,7 +4,7 @@
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd https://psalm.dev/schema/config"
 >
     <projectFiles>
         <directory name="src" />
@@ -12,4 +12,13 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+    <!-- suppress -->
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Resource"/>
+            </errorLevel>
+        </MissingConstructor>
+    </issueHandlers>
 </psalm>
+
