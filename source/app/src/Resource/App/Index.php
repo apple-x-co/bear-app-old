@@ -8,6 +8,7 @@ use BEAR\Resource\ResourceObject;
 
 class Index extends ResourceObject
 {
+    /** @var array{overview: string, issue: string, _links: string} */
     public $body = [
         'overview' => 'This is the BEAR.App REST API',
         'issue' => 'https://github.com/apple-x-co/BEAR.App/issues',

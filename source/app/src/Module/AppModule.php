@@ -31,20 +31,20 @@ class AppModule extends AbstractAppModule
         $appDir = $this->appMeta->appDir;
 
         // DB
-        $db_dns = getenv('APP_DB_DNS');
-        $db_user = getenv('APP_DB_USER');
-        $db_pass = getenv('APP_DB_PASS');
-        $db_slave = getenv('APP_SLAVE_DB_HOSTS');
-        assert(is_string($db_dns));
-        assert(is_string($db_user));
-        assert(is_string($db_pass));
-        assert(is_string($db_slave));
+        $dbDns = getenv('APP_DB_DNS');
+        $dbUser = getenv('APP_DB_USER');
+        $dbPass = getenv('APP_DB_PASS');
+        $dbSlave = getenv('APP_SLAVE_DB_HOSTS');
+        assert(is_string($dbDns));
+        assert(is_string($dbUser));
+        assert(is_string($dbPass));
+        assert(is_string($dbSlave));
         $this->install(
             new AuraSqlModule(
-                $db_dns,
-                $db_user,
-                $db_pass,
-                $db_slave
+                $dbDns,
+                $dbUser,
+                $dbPass,
+                $dbSlave
             )
         );
         $this->install(new AuraSqlQueryModule('mysql'));

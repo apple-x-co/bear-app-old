@@ -18,7 +18,7 @@ final class TestModule extends AbstractModule
     protected function configure()
     {
         // DB
-        $db_dns = sprintf('sqlite:%s/var/db/unit_test.sqlite3', dirname(__DIR__, 2));
-        $this->install(new AuraSqlModule($db_dns));
+        $dbDns = sprintf('sqlite:%s/var/db/unit_test.sqlite3', dirname(__DIR__, 2));
+        $this->install(new AuraSqlModule($dbDns));
     }
 }
