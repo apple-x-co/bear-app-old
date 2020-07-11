@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\App;
 
 use BEAR\Resource\ResourceInterface;
@@ -7,6 +9,8 @@ use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
 use MyVendor\MyProject\Injector;
 use PHPUnit\Framework\TestCase;
+
+use function GuzzleHttp\json_decode;
 
 final class UsersTest extends TestCase
 {
@@ -23,13 +27,13 @@ final class UsersTest extends TestCase
     {
         $ro = $this->resource->post('app://self/users', [
             'username' => 'bear',
-            'email' => 'bear@example.com'
+            'email' => 'bear@example.com',
         ]);
         self::assertSame(StatusCode::CREATED, $ro->code);
         self::assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
 
-        $json = (string)$ro;
-        $href = \GuzzleHttp\json_decode($json)->_links->{'detail'}->href;
+        $json = (string) $ro;
+        $href = json_decode($json)->_links->{'detail'}->href;
         self::assertNotEmpty($href);
     }
 
@@ -41,8 +45,8 @@ final class UsersTest extends TestCase
         $ro = $this->resource->get('app://self/users');
         self::assertSame(StatusCode::OK, $ro->code);
 
-        $json = (string)$ro;
-        $href = \GuzzleHttp\json_decode($json)->_links->{'create'}->href;
+        $json = (string) $ro;
+        $href = json_decode($json)->_links->{'create'}->href;
         self::assertNotEmpty($href);
     }
 }

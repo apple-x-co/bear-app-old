@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Module;
 
 use AppCore\Application\User\UserApplicationService;

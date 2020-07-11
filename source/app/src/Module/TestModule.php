@@ -1,9 +1,14 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Module;
 
 use Ray\AuraSqlModule\AuraSqlModule;
 use Ray\Di\AbstractModule;
+
+use function dirname;
+use function sprintf;
 
 final class TestModule extends AbstractModule
 {

@@ -1,19 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\Page;
 
-use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
 use MyVendor\MyProject\Injector;
 use PHPUnit\Framework\TestCase;
 
 class IndexTest extends TestCase
 {
-    /**
-     * @var ResourceInterface
-     */
+    /** @var ResourceInterface */
     private $resource;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $injector = Injector::getInstance('test-app');
         $this->resource = $injector->getInstance(ResourceInterface::class);

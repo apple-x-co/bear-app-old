@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\UserApplicationService;
@@ -12,19 +14,11 @@ use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
 use Ray\AuraSqlModule\Annotation\Transactional;
 
-/**
- * Class Users
- */
 class Users extends ResourceObject
 {
     /** @var UserApplicationService */
     private $userApplicationService;
 
-    /**
-     * Users constructor.
-     *
-     * @param UserApplicationService $userApplicationService
-     */
     public function __construct(UserApplicationService $userApplicationService)
     {
         $this->userApplicationService = $userApplicationService;
@@ -36,7 +30,7 @@ class Users extends ResourceObject
      * @JsonSchema(schema="users.json")
      * @Link(rel="create", href="/users", method="post")
      */
-    public function onGet() : ResourceObject
+    public function onGet(): ResourceObject
     {
         $generator = $this->userApplicationService->list();
 
@@ -45,7 +39,7 @@ class Users extends ResourceObject
             $users[] = [
                 'id' => $user->getId(),
                 'username' => $user->getUserName(),
-                'email' => $user->getEmail()
+                'email' => $user->getEmail(),
             ];
         }
 
@@ -55,9 +49,6 @@ class Users extends ResourceObject
     }
 
     /**
-     * @param string $username
-     * @param string $email
-     *
      * @return $this|ResourceObject
      *
      * @JsonSchema(schema="user.json", params="users.json")
@@ -68,7 +59,7 @@ class Users extends ResourceObject
     public function onPost(
         string $username,
         string $email
-    ) : ResourceObject {
+    ): ResourceObject {
         $user = $this->userApplicationService->create(
             new UserCreateCommand(
                 $username,

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MyVendor\MyProject\Module;
 
 use BEAR\Package\AbstractAppModule;
@@ -10,12 +13,15 @@ use Ray\AuraSqlModule\AuraSqlModule;
 use Ray\AuraSqlModule\AuraSqlQueryModule;
 use Ray\Query\SqlQueryModule;
 
+use function assert;
+use function dirname;
+use function file_exists;
+use function getenv;
+use function is_string;
+
 class AppModule extends AbstractAppModule
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure() : void
+    protected function configure(): void
     {
         $env = dirname(__DIR__, 2) . '/.env';
         if (file_exists($env)) {
@@ -59,6 +65,6 @@ class AppModule extends AbstractAppModule
         $this->install(new DddCoreModule());
 
         // BEAR.Package
-        $this->install(new PackageModule);
+        $this->install(new PackageModule());
     }
 }
