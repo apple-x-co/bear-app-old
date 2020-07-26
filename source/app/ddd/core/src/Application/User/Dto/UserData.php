@@ -1,6 +1,8 @@
 <?php
+
 declare(strict_types=1);
-namespace AppCore\Application\User;
+
+namespace AppCore\Application\User\Dto;
 
 use AppCore\Domain\Model\User\User;
 
@@ -30,7 +32,7 @@ final class UserData
     /**
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -38,7 +40,7 @@ final class UserData
     /**
      * @return string
      */
-    public function getUserName() : string
+    public function getUserName(): string
     {
         return $this->userName;
     }
@@ -46,7 +48,7 @@ final class UserData
     /**
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }

@@ -1,6 +1,8 @@
 <?php
+
 declare(strict_types=1);
-namespace AppCore\Application\User;
+
+namespace AppCore\Application\User\Command;
 
 final class UserCreateCommand
 {

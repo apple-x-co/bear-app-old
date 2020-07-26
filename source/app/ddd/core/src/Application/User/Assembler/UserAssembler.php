@@ -1,7 +1,10 @@
 <?php
-declare(strict_types=1);
-namespace AppCore\Application\User;
 
+declare(strict_types=1);
+
+namespace AppCore\Application\User\Assembler;
+
+use AppCore\Application\User\Dto\UserData;
 use AppCore\Domain\Model\User\User;
 
 final class UserAssembler

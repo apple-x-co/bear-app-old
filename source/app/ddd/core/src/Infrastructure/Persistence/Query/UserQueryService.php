@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace AppCore\Infrastructure\Persistence\Query;
 
-use AppCore\Application\User\UserAssembler;
+use AppCore\Application\User\Assembler\UserAssembler;
 use AppCore\Application\User\UserQueryServiceInterface;
 use AppCore\Domain\Model\User\UserQueryInterface;
 use Generator;

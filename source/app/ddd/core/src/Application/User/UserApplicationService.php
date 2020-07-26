@@ -1,7 +1,15 @@
 <?php
+
 declare(strict_types=1);
+
 namespace AppCore\Application\User;
 
+use AppCore\Application\User\Assembler\UserAssembler;
+use AppCore\Application\User\Command\UserCreateCommand;
+use AppCore\Application\User\Command\UserDeleteCommand;
+use AppCore\Application\User\Command\UserGetCommand;
+use AppCore\Application\User\Command\UserUpdateCommand;
+use AppCore\Application\User\Dto\UserData;
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserDuplicationException;
 use AppCore\Domain\Model\User\User;

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\UserDeleteCommand;
-use AppCore\Application\User\UserGetCommand;
+use AppCore\Application\User\Command\UserDeleteCommand;
+use AppCore\Application\User\Command\UserGetCommand;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;

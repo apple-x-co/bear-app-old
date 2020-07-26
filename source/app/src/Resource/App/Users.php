@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\UserCreateCommand;
+use AppCore\Application\User\Command\UserCreateCommand;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
