@@ -4,15 +4,22 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Module;
 
-use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\UserQueryServiceInterface;
-use AppCore\Domain\Model\User\UserQueryInterface;
+use AppCore\Domain\Application\User\UserCreateUseCase;
+use AppCore\Domain\Application\User\UserDeleteUseCase;
+use AppCore\Domain\Application\User\UserGetUseCase;
+use AppCore\Domain\Application\User\UserListUseCase;
+use AppCore\Domain\Application\User\UserUpdateUseCase;
+use AppCore\Domain\Model\User\UserRepositoryInterface;
 use AppCore\Domain\Service\UserServiceInterface;
-use AppCore\Infrastructure\Persistence\Query\UserQuery;
-use AppCore\Infrastructure\Persistence\Query\UserQueryService;
-use AppCore\Infrastructure\Persistence\Query\UsersCounter;
-use AppCore\Infrastructure\Persistence\Query\UsersFinder;
+use AppCore\Infrastructure\Persistence\RDB\UserRepository;
+use AppCore\Infrastructure\Persistence\RDB\UsersCounter;
+use AppCore\Infrastructure\Persistence\RDB\UsersFinder;
 use AppCore\Infrastructure\Service\UserService;
+use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
+use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
+use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
+use AppCore\UseCase\User\Get\UserListUseCaseInterface;
+use AppCore\UseCase\User\Update\UserUpdateUseCaseInterface;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
@@ -20,16 +27,19 @@ final class DddCoreModule extends AbstractModule
 {
     protected function configure()
     {
-        // Application
-        $this->bind(UserApplicationService::class)->in(Scope::SINGLETON);
-
         // Domain
         $this->bind(UserServiceInterface::class)->to(UserService::class)->in(Scope::SINGLETON);
 
         // Infrastructure
-        $this->bind(UserQueryServiceInterface::class)->to(UserQueryService::class)->in(Scope::SINGLETON);
-        $this->bind(UserQueryInterface::class)->to(UserQuery::class)->in(Scope::SINGLETON);
+        $this->bind(UserRepositoryInterface::class)->to(UserRepository::class)->in(Scope::SINGLETON);
         $this->bind('')->annotatedWith('find_users')->to(UsersFinder::class);
         $this->bind('')->annotatedWith('count_users')->to(UsersCounter::class);
+
+        // UseCase
+        $this->bind(UserCreateUseCaseInterface::class)->to(UserCreateUseCase::class)->in(Scope::SINGLETON);
+        $this->bind(UserDeleteUseCaseInterface::class)->to(UserDeleteUseCase::class)->in(Scope::SINGLETON);
+        $this->bind(UserGetUseCaseInterface::class)->to(UserGetUseCase::class)->in(Scope::SINGLETON);
+        $this->bind(UserListUseCaseInterface::class)->to(UserListUseCase::class)->in(Scope::SINGLETON);
+        $this->bind(UserUpdateUseCaseInterface::class)->to(UserUpdateUseCase::class)->in(Scope::SINGLETON);
     }
 }

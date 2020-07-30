@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Application\User\Command;
+namespace AppCore\UseCase\User\Get;
 
-final class UserGetCommand
+final class UserGetRequest
 {
     private $id;
 
     /**
-     * UserGetCommand constructor.
+     * UserGetRequest constructor.
      *
      * @param $id
      */

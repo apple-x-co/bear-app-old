@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\Command\UserDeleteCommand;
-use AppCore\Application\User\Command\UserGetCommand;
+use AppCore\UseCase\User\Delete\UserDeleteRequest;
+use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
+use AppCore\UseCase\User\Get\UserGetRequest;
+use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
@@ -14,12 +15,22 @@ use Koriym\HttpConstants\StatusCode;
 
 class User extends ResourceObject
 {
-    /** @var UserApplicationService */
-    private $userApplicationService;
+    /** @var UserGetUseCaseInterface */
+    private $userGetUseCase;
 
-    public function __construct(UserApplicationService $userApplicationService)
+    /** @var UserDeleteUseCaseInterface */
+    private $userDeleteUseCase;
+
+    /**
+     * User constructor.
+     *
+     * @param UserGetUseCaseInterface    $userGetUseCase
+     * @param UserDeleteUseCaseInterface $userDeleteUseCase
+     */
+    public function __construct(UserGetUseCaseInterface $userGetUseCase, UserDeleteUseCaseInterface $userDeleteUseCase)
     {
-        $this->userApplicationService = $userApplicationService;
+        $this->userGetUseCase = $userGetUseCase;
+        $this->userDeleteUseCase = $userDeleteUseCase;
     }
 
     /**
@@ -30,8 +41,8 @@ class User extends ResourceObject
      */
     public function onGet(int $id): ResourceObject
     {
-        $user = $this->userApplicationService->get(
-            new UserGetCommand($id)
+        $user = $this->userGetUseCase->handle(
+            new UserGetRequest($id)
         );
 
         $this->body = [
@@ -45,8 +56,8 @@ class User extends ResourceObject
 
     public function onDelete(int $id): ResourceObject
     {
-        $this->userApplicationService->delete(
-            new UserDeleteCommand($id)
+        $this->userDeleteUseCase->handle(
+            new UserDeleteRequest($id)
         );
 
         $this->code = StatusCode::NO_CONTENT;

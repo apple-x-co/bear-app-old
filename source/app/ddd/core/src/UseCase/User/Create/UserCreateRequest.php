@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Application\User\Command;
+namespace AppCore\UseCase\User\Create;
 
-final class UserCreateCommand
+final class UserCreateRequest
 {
     /** @var string */
     private $userName;
@@ -13,7 +13,7 @@ final class UserCreateCommand
     private $email;
 
     /**
-     * UserCreateCommand constructor.
+     * UserCreateRequest constructor.
      *
      * @param string $userName
      * @param string $email

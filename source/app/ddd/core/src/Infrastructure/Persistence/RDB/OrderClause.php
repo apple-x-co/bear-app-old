@@ -1,6 +1,8 @@
 <?php
+
 declare(strict_types=1);
-namespace AppCore\Infrastructure\Persistence\Query;
+
+namespace AppCore\Infrastructure\Persistence\RDB;
 
 use AppCore\Infrastructure\OrderBy;
 use Aura\SqlQuery\Common\SelectInterface;

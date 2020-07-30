@@ -1,6 +1,10 @@
 <?php
+
 declare(strict_types=1);
+
 namespace AppCore\Domain\Model\User;
+
+use Generator;
 
 interface UserRepositoryInterface
 {
@@ -12,59 +16,34 @@ interface UserRepositoryInterface
     public function get(int $id) : User;
 
     /**
+     * @return User[]
+     */
+    public function all() : array;
+
+    /**
      * @param array<string, string|int|array> $conditions
      *
      * @return int
      */
-    public function count(array $conditions) : int;
+    public function count(array $conditions = []) : int;
 
     /**
      * @param array<string, string|int|array>                                             $conditions
      * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
-     * @return User[]
+     * @return Generator
      */
-    public function find(array $conditions, array $options = []) : array;
-
-    /**
-     * @param array<string, string|int|array>                                             $conditions
-     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
-     *
-     * @return User|null
-     */
-    public function one(array $conditions, array $options = []) : ?User;
-
-    /**
-     * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
-     *
-     * @return User[]
-     */
-    public function getAll(array $options = []) : array;
-
-    /**
-     * @param User $user
-     */
-    public function store(User $user) : void;
-
-    /**
-     * @param User $user
-     */
-    public function remove(User $user) : void;
+    public function find(array $conditions = [], array $options = []) : Generator;
 
     /**
      * @param User $user
      *
-     * @return array{
-     *                user_name: string,
-     *                email: string
-     *                }
+     * @return User
      */
-    public function toRawData(User $user) : array;
+    public function store(User $user) : User;
 
     /**
-     * @param array<string, string|int|array> $conditions
-     *
-     * @return array
+     * @param int $id
      */
-    public function makeWhere(array $conditions) : array;
+    public function delete(int $id) : void;
 }

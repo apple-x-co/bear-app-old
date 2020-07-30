@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\Command\UserCreateCommand;
+use AppCore\UseCase\User\Create\UserCreateRequest;
+use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
+use AppCore\UseCase\User\Get\UserListUseCaseInterface;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
@@ -16,12 +17,24 @@ use Ray\AuraSqlModule\Annotation\Transactional;
 
 class Users extends ResourceObject
 {
-    /** @var UserApplicationService */
-    private $userApplicationService;
+    /** @var UserCreateUseCaseInterface */
+    private $userCreateUseCase;
 
-    public function __construct(UserApplicationService $userApplicationService)
-    {
-        $this->userApplicationService = $userApplicationService;
+    /** @var UserListUseCaseInterface */
+    private $userListUseCase;
+
+    /**
+     * Users constructor.
+     *
+     * @param UserCreateUseCaseInterface $userCreateUseCase
+     * @param UserListUseCaseInterface   $userListUseCase
+     */
+    public function __construct(
+        UserCreateUseCaseInterface $userCreateUseCase,
+        UserListUseCaseInterface $userListUseCase
+    ) {
+        $this->userCreateUseCase = $userCreateUseCase;
+        $this->userListUseCase = $userListUseCase;
     }
 
     /**
@@ -32,7 +45,7 @@ class Users extends ResourceObject
      */
     public function onGet(): ResourceObject
     {
-        $generator = $this->userApplicationService->list();
+        $generator = $this->userListUseCase->handle();
 
         $users = [];
         foreach ($generator as $user) {
@@ -60,17 +73,17 @@ class Users extends ResourceObject
         string $username,
         string $email
     ): ResourceObject {
-        $user = $this->userApplicationService->create(
-            new UserCreateCommand(
+        $createResponse = $this->userCreateUseCase->handle(
+            new UserCreateRequest(
                 $username,
                 $email
             )
         );
 
-        $this->body['id'] = $user->getId();
+        $this->body['id'] = $createResponse->getId();
 
         $this->code = StatusCode::CREATED;
-        $this->headers[ResponseHeader::LOCATION] = '/users/' . $user->getId();
+        $this->headers[ResponseHeader::LOCATION] = '/users/' . $createResponse->getId();
 
         return $this;
     }

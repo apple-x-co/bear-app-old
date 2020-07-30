@@ -1,13 +1,15 @@
 <?php
+
 declare(strict_types=1);
-namespace AppCore\Infrastructure\Persistence\Query;
+
+namespace AppCore\Infrastructure\Persistence\RDB;
 
 use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserNotFoundException;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserId;
 use AppCore\Domain\Model\User\UserName;
-use AppCore\Domain\Model\User\UserQueryInterface;
+use AppCore\Domain\Model\User\UserRepositoryInterface;
 use Aura\Sql\ExtendedPdoInterface;
 use Generator;
 use Ray\Di\Di\Named;
@@ -15,7 +17,7 @@ use Ray\Query\RowInterface;
 use Ray\Query\RowListInterface;
 use function sprintf;
 
-final class UserQuery implements UserQueryInterface
+final class UserRepository implements UserRepositoryInterface
 {
     /** @var ExtendedPdoInterface */
     private $pdo;
@@ -42,7 +44,7 @@ final class UserQuery implements UserQueryInterface
     private $deleteUser;
 
     /**
-     * UserQuery constructor.
+     * UserRepository constructor.
      *
      * @param ExtendedPdoInterface $pdo
      * @param callable             $createUser

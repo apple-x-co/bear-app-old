@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Application\User\Command;
+namespace AppCore\UseCase\User\Update;
 
-final class UserUpdateCommand
+final class UserUpdateRequest
 {
     /** @var int */
     private $id;
@@ -16,7 +16,7 @@ final class UserUpdateCommand
     private $email;
 
     /**
-     * UserUpdateCommand constructor.
+     * UserUpdateRequest constructor.
      *
      * @param int         $id
      * @param string|null $userName

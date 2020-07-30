@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Application\User\Dto;
+namespace AppCore\UseCase\User\Get;
 
 use AppCore\Domain\Model\User\User;
 
-final class UserData
+final class UserListResponse
 {
     /** @var int */
     private $id;
@@ -18,9 +18,9 @@ final class UserData
     private $email;
 
     /**
-     * UserData constructor.
+     * UserGetResponse constructor.
      *
-     * @param User
+     * @param User $user
      */
     public function __construct(User $user)
     {
