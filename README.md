@@ -127,3 +127,9 @@ https://github.com/rjsf-team/react-jsonschema-form
 
 CQRS実践入門  
 https://little-hands.hatenablog.com/entry/2019/12/02/cqrs
+
+DDDのモデリングとは何なのか、 そしてどうコードに落とすのか  
+https://www.slideshare.net/koichiromatsuoka/domain-modeling-andcoding
+
+PlantUML  
+https://plantuml.com/ja/class-diagram

@@ -1,0 +1,36 @@
+@startuml
+
+hide circle
+hide empty fields
+hide empty methods
+
+rectangle "User's aggregate" {
+    class ユーザー {
+        ユーザーID
+        名前
+        Eメールアドレス
+    }
+}
+
+note right of ユーザー
+・メソッドは不要
+・属性も全て書く必要なし
+・「ルール・制約」を吹き出し内に記述
+　　例：ユーザーは、XXの状態で作成される
+end note
+
+rectangle "Recipe's aggregate" {
+    class レシピ {
+        ユーザーID
+        レシピID
+    }
+
+    class レシピカテゴリ {
+        レシピID
+    }
+}
+
+レシピ --> ユーザー: ID参照
+レシピカテゴリ --o レシピ
+
+@enduml
