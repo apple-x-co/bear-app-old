@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AppCore\UseCase\User\Get;
 
-final class UserGetRequest
+final class UserGetInputData
 {
     private $id;
 
     /**
-     * UserGetRequest constructor.
+     * UserGetInputData constructor.
      *
      * @param $id
      */

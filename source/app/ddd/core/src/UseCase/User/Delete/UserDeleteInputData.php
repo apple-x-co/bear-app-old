@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AppCore\UseCase\User\Delete;
 
-final class UserDeleteRequest
+final class UserDeleteInputData
 {
     private $id;
 
     /**
-     * UserDeleteRequest constructor.
+     * UserDeleteInputData constructor.
      *
      * @param $id
      */

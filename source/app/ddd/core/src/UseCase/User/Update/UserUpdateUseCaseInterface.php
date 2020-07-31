@@ -7,7 +7,7 @@ namespace AppCore\UseCase\User\Update;
 interface UserUpdateUseCaseInterface
 {
     /**
-     * @param UserUpdateRequest $request
+     * @param UserUpdateInputData $input
      */
-    public function handle(UserUpdateRequest $request): void;
+    public function handle(UserUpdateInputData $input): void;
 }

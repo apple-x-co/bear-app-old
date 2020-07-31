@@ -6,7 +6,7 @@ namespace AppCore\UseCase\User\Get;
 
 use AppCore\Domain\Model\User\User;
 
-final class UserListResponse
+final class UserGetOutputData
 {
     /** @var int */
     private $id;
@@ -18,7 +18,7 @@ final class UserListResponse
     private $email;
 
     /**
-     * UserGetResponse constructor.
+     * UserGetOutputData constructor.
      *
      * @param User $user
      */

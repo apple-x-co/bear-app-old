@@ -7,7 +7,7 @@ namespace AppCore\UseCase\User\Delete;
 interface UserDeleteUseCaseInterface
 {
     /**
-     * @param UserDeleteRequest $request
+     * @param UserDeleteInputData $input
      */
-    public function handle(UserDeleteRequest $request): void;
+    public function handle(UserDeleteInputData $input): void;
 }

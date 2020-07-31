@@ -7,9 +7,9 @@ namespace AppCore\UseCase\User\Create;
 interface UserCreateUseCaseInterface
 {
     /**
-     * @param UserCreateRequest $request
+     * @param UserCreateInputData $input
      *
-     * @return UserCreateResponse
+     * @return UserCreateOutputData
      */
-    public function handle(UserCreateRequest $request): UserCreateResponse;
+    public function handle(UserCreateInputData $input): UserCreateOutputData;
 }

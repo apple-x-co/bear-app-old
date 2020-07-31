@@ -9,9 +9,9 @@ use AppCore\Domain\Model\User\Exception\UserDuplicationException;
 use AppCore\Domain\Model\User\User;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\Domain\Service\UserServiceInterface;
-use AppCore\UseCase\User\Create\UserCreateRequest;
-use AppCore\UseCase\User\Create\UserCreateResponse;
+use AppCore\Domain\Service\UserDomainServiceInterface;
+use AppCore\UseCase\User\Create\UserCreateInputData;
+use AppCore\UseCase\User\Create\UserCreateOutputData;
 use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
 
 class UserCreateUseCase implements UserCreateUseCaseInterface
@@ -19,38 +19,38 @@ class UserCreateUseCase implements UserCreateUseCaseInterface
     /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /** @var UserServiceInterface */
-    private $userService;
+    /** @var UserDomainServiceInterface */
+    private $userDomainService;
 
     /**
      * UserCreateUseCase constructor.
      *
-     * @param UserRepositoryInterface $userRepository
-     * @param UserServiceInterface    $userService
+     * @param UserRepositoryInterface    $userRepository
+     * @param UserDomainServiceInterface $userDomainService
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserServiceInterface $userService)
+    public function __construct(UserRepositoryInterface $userRepository, UserDomainServiceInterface $userDomainService)
     {
         $this->userRepository = $userRepository;
-        $this->userService = $userService;
+        $this->userDomainService = $userDomainService;
     }
 
     /**
      * @inheritDoc
      */
-    public function handle(UserCreateRequest $request): UserCreateResponse
+    public function handle(UserCreateInputData $input): UserCreateOutputData
     {
         $user = new User(
             null,
-            new UserName($request->getUserName()),
-            new Email($request->getEmail())
+            new UserName($input->getUserName()),
+            new Email($input->getEmail())
         );
 
-        if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', $request->getEmail()));
+        if ($this->userDomainService->exists($user)) {
+            throw new UserDuplicationException(sprintf('email : %s', $input->getEmail()));
         }
 
         $user = $this->userRepository->store($user);
 
-        return new UserCreateResponse($user);
+        return new UserCreateOutputData($user);
     }
 }

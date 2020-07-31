@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AppCore\UseCase\User\Update;
 
-final class UserUpdateRequest
+final class UserUpdateInputData
 {
     /** @var int */
     private $id;
@@ -16,7 +16,7 @@ final class UserUpdateRequest
     private $email;
 
     /**
-     * UserUpdateRequest constructor.
+     * UserUpdateInputData constructor.
      *
      * @param int         $id
      * @param string|null $userName

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AppCore\UseCase\User\Create;
 
-final class UserCreateRequest
+final class UserCreateInputData
 {
     /** @var string */
     private $userName;
@@ -13,7 +13,7 @@ final class UserCreateRequest
     private $email;
 
     /**
-     * UserCreateRequest constructor.
+     * UserCreateInputData constructor.
      *
      * @param string $userName
      * @param string $email

@@ -9,7 +9,7 @@ use Generator;
 interface UserListUseCaseInterface
 {
     /**
-     * @return Generator
+     * @return Generator|UserListOutputData[]
      */
     public function handle(): Generator;
 }

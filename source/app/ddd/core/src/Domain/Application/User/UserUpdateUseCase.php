@@ -8,8 +8,8 @@ use AppCore\Domain\Model\Email;
 use AppCore\Domain\Model\User\Exception\UserDuplicationException;
 use AppCore\Domain\Model\User\UserName;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\Domain\Service\UserServiceInterface;
-use AppCore\UseCase\User\Update\UserUpdateRequest;
+use AppCore\Domain\Service\UserDomainServiceInterface;
+use AppCore\UseCase\User\Update\UserUpdateInputData;
 use AppCore\UseCase\User\Update\UserUpdateUseCaseInterface;
 
 class UserUpdateUseCase implements UserUpdateUseCaseInterface
@@ -17,38 +17,37 @@ class UserUpdateUseCase implements UserUpdateUseCaseInterface
     /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /** @var UserServiceInterface */
-    private $userService;
-
+    /** @var UserDomainServiceInterface */
+    private $userDomainService;
 
     /**
      * UserUpdateUseCase constructor.
      *
-     * @param UserRepositoryInterface $userRepository
-     * @param UserServiceInterface    $userService
+     * @param UserRepositoryInterface    $userRepository
+     * @param UserDomainServiceInterface $userDomainService
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserServiceInterface $userService)
+    public function __construct(UserRepositoryInterface $userRepository, UserDomainServiceInterface $userDomainService)
     {
         $this->userRepository = $userRepository;
-        $this->userService = $userService;
+        $this->userDomainService = $userDomainService;
     }
 
     /**
      * @inheritDoc
      */
-    public function handle(UserUpdateRequest $request): void
+    public function handle(UserUpdateInputData $input): void
     {
-        $user = $this->userRepository->get($request->getId());
+        $user = $this->userRepository->get($input->getId());
 
-        if ($this->userService->exists($user)) {
-            throw new UserDuplicationException(sprintf('email : %s', (string) $user->getEmail()));
+        if ($this->userDomainService->exists($user)) {
+            throw new UserDuplicationException(sprintf('email : %s', (string)$user->getEmail()));
         }
 
-        if ($request->getUserName() !== null) {
-            $user->changeUserName(new UserName($request->getUserName()));
+        if ($input->getUserName() !== null) {
+            $user->changeUserName(new UserName($input->getUserName()));
         }
-        if ($request->getEmail() !== null) {
-            $user->changeEmail(new Email($request->getEmail()));
+        if ($input->getEmail() !== null) {
+            $user->changeEmail(new Email($input->getEmail()));
         }
 
         $this->userRepository->store($user);

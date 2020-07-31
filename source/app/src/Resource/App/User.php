@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\UseCase\User\Delete\UserDeleteRequest;
+use AppCore\UseCase\User\Delete\UserDeleteInputData;
 use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
-use AppCore\UseCase\User\Get\UserGetRequest;
+use AppCore\UseCase\User\Get\UserGetInputData;
 use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
@@ -42,7 +42,7 @@ class User extends ResourceObject
     public function onGet(int $id): ResourceObject
     {
         $user = $this->userGetUseCase->handle(
-            new UserGetRequest($id)
+            new UserGetInputData($id)
         );
 
         $this->body = [
@@ -57,7 +57,7 @@ class User extends ResourceObject
     public function onDelete(int $id): ResourceObject
     {
         $this->userDeleteUseCase->handle(
-            new UserDeleteRequest($id)
+            new UserDeleteInputData($id)
         );
 
         $this->code = StatusCode::NO_CONTENT;

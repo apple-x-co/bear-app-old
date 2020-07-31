@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace AppCore\UseCase\User\Get;
 
-use AppCore\UseCase\User\Get\UserGetRequest;
+use AppCore\UseCase\User\Get\UserGetInputData;
 
 interface UserGetUseCaseInterface
 {
     /**
-     * @param UserGetRequest $request
+     * @param UserGetInputData $input
      *
-     * @return UserGetResponse
+     * @return UserGetOutputData
      */
-    public function handle(UserGetRequest $request): UserGetResponse;
+    public function handle(UserGetInputData $input): UserGetOutputData;
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppCore\Domain\Application\User;
 
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\UseCase\User\Get\UserListResponse;
+use AppCore\UseCase\User\Get\UserListOutputData;
 use AppCore\UseCase\User\Get\UserListUseCaseInterface;
 use Generator;
 
@@ -32,7 +32,7 @@ class UserListUseCase implements UserListUseCaseInterface
         $generator = $this->userRepository->find();
 
         foreach ($generator as $user) {
-            yield new UserListResponse($user);
+            yield new UserListOutputData($user);
         }
     }
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AppCore\Domain\Application\User;
 
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\UseCase\User\Get\UserGetRequest;
-use AppCore\UseCase\User\Get\UserGetResponse;
+use AppCore\UseCase\User\Get\UserGetInputData;
+use AppCore\UseCase\User\Get\UserGetOutputData;
 use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
 
 class UserGetUseCase implements UserGetUseCaseInterface
@@ -27,10 +27,10 @@ class UserGetUseCase implements UserGetUseCaseInterface
     /**
      * @inheritDoc
      */
-    public function handle(UserGetRequest $request): UserGetResponse
+    public function handle(UserGetInputData $input): UserGetOutputData
     {
-        $user = $this->userRepository->get($request->getId());
+        $user = $this->userRepository->get($input->getId());
 
-        return new UserGetResponse($user);
+        return new UserGetOutputData($user);
     }
 }

@@ -80,13 +80,13 @@ composer run-script tests
 
 ### UseCase層
 
-**ユースケースインプットポート**
+**ユースケースインプット**
 
-`AppCore\UseCase\User\Create\UserCreateRequest`
+`AppCore\UseCase\User\Create\UserCreateInputData`
 
-**ユースケースアウトプットポート**
+**ユースケースアウトプット**
 
-`AppCore\UseCase\User\Create\UserCreateResponse`
+`AppCore\UseCase\User\Create\UserCreateOutputData`
 
 **ユースケースインターフェース**
 

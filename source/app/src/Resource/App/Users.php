@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\UseCase\User\Create\UserCreateRequest;
+use AppCore\UseCase\User\Create\UserCreateInputData;
 use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
 use AppCore\UseCase\User\Get\UserListUseCaseInterface;
 use BEAR\RepositoryModule\Annotation\Purge;
@@ -74,7 +74,7 @@ class Users extends ResourceObject
         string $email
     ): ResourceObject {
         $createResponse = $this->userCreateUseCase->handle(
-            new UserCreateRequest(
+            new UserCreateInputData(
                 $username,
                 $email
             )

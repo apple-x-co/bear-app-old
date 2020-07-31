@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppCore\Domain\Application\User;
 
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\UseCase\User\Delete\UserDeleteRequest;
+use AppCore\UseCase\User\Delete\UserDeleteInputData;
 use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
 
 class UserDeleteUseCase implements UserDeleteUseCaseInterface
@@ -26,9 +26,9 @@ class UserDeleteUseCase implements UserDeleteUseCaseInterface
     /**
      * @inheritDoc
      */
-    public function handle(UserDeleteRequest $request): void
+    public function handle(UserDeleteInputData $input): void
     {
-        $user = $this->userRepository->get($request->getId());
+        $user = $this->userRepository->get($input->getId());
 
         $this->userRepository->delete($user->getId()->val());
     }

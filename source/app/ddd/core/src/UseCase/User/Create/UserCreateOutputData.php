@@ -6,13 +6,13 @@ namespace AppCore\UseCase\User\Create;
 
 use AppCore\Domain\Model\User\User;
 
-final class UserCreateResponse
+final class UserCreateOutputData
 {
     /** @var int */
     private $id;
 
     /**
-     * UserData constructor.
+     * UserCreateOutputData constructor.
      *
      * @param User $user
      */
