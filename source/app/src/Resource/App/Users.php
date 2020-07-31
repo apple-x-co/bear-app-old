@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
+use App\ViewModel\UsersGetViewModel;
 use AppCore\UseCase\User\Create\UserCreateInputData;
 use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
 use AppCore\UseCase\User\Get\UserListUseCaseInterface;
@@ -49,11 +50,11 @@ class Users extends ResourceObject
 
         $users = [];
         foreach ($generator as $user) {
-            $users[] = [
-                'id' => $user->getId(),
-                'username' => $user->getUserName(),
-                'email' => $user->getEmail(),
-            ];
+            $users[] = new UsersGetViewModel(
+                $user->getId(),
+                $user->getUserName(),
+                $user->getEmail()
+            );
         }
 
         $this->body = ['users' => $users];
