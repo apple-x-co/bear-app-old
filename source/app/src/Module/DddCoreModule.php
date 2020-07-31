@@ -10,11 +10,11 @@ use AppCore\Domain\Application\User\UserGetUseCase;
 use AppCore\Domain\Application\User\UserListUseCase;
 use AppCore\Domain\Application\User\UserUpdateUseCase;
 use AppCore\Domain\Model\User\UserRepositoryInterface;
-use AppCore\Domain\Service\UserServiceInterface;
+use AppCore\Domain\Service\UserDomainServiceInterface;
 use AppCore\Infrastructure\Persistence\RDB\UserRepository;
 use AppCore\Infrastructure\Persistence\RDB\UsersCounter;
 use AppCore\Infrastructure\Persistence\RDB\UsersFinder;
-use AppCore\Infrastructure\Service\UserService;
+use AppCore\Infrastructure\Service\UserDomainService;
 use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
 use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
 use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
@@ -28,7 +28,7 @@ final class DddCoreModule extends AbstractModule
     protected function configure()
     {
         // Domain
-        $this->bind(UserServiceInterface::class)->to(UserService::class)->in(Scope::SINGLETON);
+        $this->bind(UserDomainServiceInterface::class)->to(UserDomainService::class)->in(Scope::SINGLETON);
 
         // Infrastructure
         $this->bind(UserRepositoryInterface::class)->to(UserRepository::class)->in(Scope::SINGLETON);

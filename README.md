@@ -30,6 +30,10 @@ composer run-script tests
 
 ### Domain層
 
+**ユースケース実装**
+
+`AppCore\Domain\Application\User\UserCreateUseCase`
+
 **ドメインモデル**
 
 `AppCore\Domain\Model\User\User`
@@ -45,7 +49,11 @@ composer run-script tests
 `AppCore\Domain\Model\User\UserId`  
 `AppCore\Domain\Model\User\UserName`
 
-**ドメインサービス（ルール・制約）**
+**リポジトリインターフェース（データの永続化・検索）**
+
+`AppCore\Domain\Model\User\UserRepositoryInterface`
+
+**ドメインサービスインターフェース（ルール・制約）**
 
 ```text
 可能な限りドメインサービスのは避ける  
@@ -54,53 +62,46 @@ composer run-script tests
 ただし、ドメインに基づいているものであり、それを実現するサービスであれば、ドメインサービスである。
 ```
 
-`AppCore\Domain\Service\UserService`
-
-**リポジトリインターフェース（データの永続化・検索）**
-
-`AppCore\Domain\Model\User\UserRepositoryInterface`
-
-**ユースケース実装**
-
-`AppCore\Domain\Application\User\UserCreateUseCase`
+`AppCore\Domain\Service\UserDomainServiceInterface`
 
 ### Infrastructure層
 
 **リポジトリ実装（データの永続化・検索）**
 
-`AppCore\Infrastructure\Persistence\Query\UserRepository`
+`AppCore\Infrastructure\Persistence\RDB\UserRepository`
+
+**ドメインサービス実装（ルール・制約）**
+
+`AppCore\Infrastructure\Service\UserDomainService`
 
 **クエリーサービス実装（CQRS）**
 
-```text
-IFで定義された検索をデータストアに合せた方法で実現
-```
+`AppCore\Infrastructure\Service\UserQueryService`
 
-`AppCore\Infrastructure\Persistence\Query\UserQueryService`
+### UseCase層
 
-### Application層
+**ユースケースインプットポート**
+
+`AppCore\UseCase\User\Create\UserCreateRequest`
+
+**ユースケースアウトプットポート**
+
+`AppCore\UseCase\User\Create\UserCreateResponse`
+
+**ユースケースインターフェース**
+
+`AppCore\UseCase\User\Create\UserCreateUseCaseInterface`
 
 **クエリーサービスインターフェース（CQRS）**
 
 ```text
-戻り値は参照系モデル（DTO）
+集約を跨いだモデルを取得したい場合に利用する。
+戻り値は専用の参照系モデル（DTO）。
+コントローラは、DTOを変換して、Viewに渡す。
 ```
 
-`AppCore\Application\User\UserQueryServiceInterface`
-
-### UseCase層
-
-**インプットポート**
-
-`AppCore\UseCase\User\Create\UserCreateRequest`
-
-**アウトプットポート**
-
-`AppCore\UseCase\User\Create\UserCreateResponse`
-
-**インターフェース**
-
-`AppCore\UseCase\User\Create\UserCreateUseCaseInterface`
+`AppCore\UseCase\UserQueryServiceInterface`  
+`AppCore\UseCase\UserXxxDto`
 
 ## Reference
 
