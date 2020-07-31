@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\ViewModel;
+namespace AppCore\InterfaceAdapter\Presenter\User;
 
+use AppCore\UseCase\User\Get\UserGetOutputData;
 use JsonSerializable;
 
-class UsersGetViewModel implements JsonSerializable
+class UserGetViewModel implements JsonSerializable
 {
     /** @var int */
     private $id;
@@ -18,17 +19,15 @@ class UsersGetViewModel implements JsonSerializable
     private $email;
 
     /**
-     * UsersGetViewModel constructor.
+     * UserGetViewModel constructor.
      *
-     * @param int    $id
-     * @param string $user_name
-     * @param string $email
+     * @param UserGetOutputData $output
      */
-    public function __construct(int $id, string $user_name, string $email)
+    public function __construct(UserGetOutputData $output)
     {
-        $this->id = $id;
-        $this->user_name = $user_name;
-        $this->email = $email;
+        $this->id = $output->getId();
+        $this->user_name = $output->getUserName();
+        $this->email = $output->getEmail();
     }
 
     /**

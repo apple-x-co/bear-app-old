@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
-use App\ViewModel\UserGetViewModel;
+use AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel;
 use AppCore\UseCase\User\Delete\UserDeleteInputData;
 use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
 use AppCore\UseCase\User\Get\UserGetInputData;
@@ -46,16 +46,7 @@ class User extends ResourceObject
             new UserGetInputData($id)
         );
 
-        $this->body = \GuzzleHttp\json_decode(
-            \GuzzleHttp\json_encode(
-                new UserGetViewModel(
-                    $output->getId(),
-                    $output->getUserName(),
-                    $output->getEmail()
-                )
-            ),
-            true
-        );
+        $this->body = \GuzzleHttp\json_decode(\GuzzleHttp\json_encode(new UserGetViewModel($output)), true);
 
         return $this;
     }
