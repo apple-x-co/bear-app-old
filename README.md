@@ -3,20 +3,13 @@
 ![PHP Test](https://github.com/apple-x-co/BEAR.App/workflows/PHP%20Test/badge.svg?branch=develop)
 [![Build Status](https://travis-ci.org/apple-x-co/BEAR.App.svg?branch=develop)](https://travis-ci.org/apple-x-co/BEAR.App)
 
-## create project
+## Create project
 
 ```bash
 composer create-project -n bear/skeleton app
 composer require bear/aura-router-module ray/query-module
 composer setup
 ./vendor/bin/psalm --init
-```
-
-## API structure
-
-```bash
-php bin/app.php get /
-php bin/app.php options /users
 ```
 
 ## QA
@@ -26,89 +19,116 @@ composer run-script test
 composer run-script tests
 ```
 
-## DDD structure
+## Diagram
 
-### Domain層
+### ユースケース図
 
-**ユースケース実装**
+「○○を△△する」形式で記載する  
 
-`AppCore\Domain\Application\User\UserCreateUseCase`
+例：  
+`docs/uml/use-cases/user.puml`
 
-**ドメインモデル**
+### モデル図
 
-`AppCore\Domain\Model\User\User`
+集約を明確にする  
 
-**値オブジェクト**
+例：  
+`docs/uml/models/domain-models.puml`
+
+
+## Program structure（DDD + CleanArchitecture）
+
+### 値オブジェクト
 
 ```text
-値オブジェクトにする基準は以下の通り。該当しない場合はプリミティブ型（int,string,bool）にする  
+以下に該当しない場合は、プリミティブ型（int,string,bool）にする
 ・ルールが存在しているか  
 ・その値を単体で扱いたいか  
 ```
 
+例：  
 `AppCore\Domain\Model\User\UserId`  
 `AppCore\Domain\Model\User\UserName`
 
-**リポジトリインターフェース（データの永続化・検索）**
-
-`AppCore\Domain\Model\User\UserRepositoryInterface`
-
-**ドメインサービスインターフェース（ルール・制約）**
+### ドメインモデル
 
 ```text
-可能な限りドメインサービスのは避ける  
-エンティティや値ブジェクトに定義できるものであれば、そこに定義する  
-ドメインオブジェクトは、値オブジェクトやエンティティと同じ括りである。  
-ただし、ドメインに基づいているものであり、それを実現するサービスであれば、ドメインサービスである。
+xxx
 ```
 
-`AppCore\Domain\Service\UserDomainServiceInterface`
+例：  
+`AppCore\Domain\Model\User\User`
 
-### Infrastructure層
 
-**リポジトリ実装（データの永続化・検索）**
+### リポジトリ
 
+```text
+ドメインモデルの永続化・検索を行う。集約内は全て処理する。
+```
+
+例：  
+`AppCore\Domain\Model\User\UserRepositoryInterface`  
 `AppCore\Infrastructure\Persistence\RDB\UserRepository`
 
-**ドメインサービス実装（ルール・制約）**
-
-`AppCore\Infrastructure\Service\UserDomainService`
-
-**クエリーサービス実装（CQRS）**
-
-`AppCore\Infrastructure\Service\UserQueryService`
-
-### UseCase層
-
-**ユースケースインプット**
-
-`AppCore\UseCase\User\Create\UserCreateInputData`
-
-**ユースケースアウトプット**
-
-`AppCore\UseCase\User\Create\UserCreateOutputData`
-
-**ユースケースインターフェース**
-
-`AppCore\UseCase\User\Create\UserCreateUseCaseInterface`
-
-**クエリーサービスインターフェース（CQRS）**
+### ドメインサービス
 
 ```text
-集約を跨いだモデルを取得したい場合に利用する。
-戻り値は専用の参照系モデル（DTO）。
-コントローラは、DTOを変換して、Viewに渡す。
+モデルや値オブジェクトに定義した場合に、不自然さがある場合にドメインサービスを利用する。
+主に、ルールや制約を定義する。例えば、重複チェック。
 ```
 
+例：  
+`AppCore\Domain\Service\UserDomainServiceInterface`  
+`AppCore\Infrastructure\Service\UserDomainService`
+
+### クエリーサービス（CQRS）
+
+```text
+集約を跨いだモデルを取得したい場合に利用する。戻り値は専用の参照系モデル（DTO）。
+参照系モデルは、値オブジェクトを含まないプリミティブな型で構成する。
+```
+
+例：  
 `AppCore\UseCase\UserQueryServiceInterface`  
-`AppCore\UseCase\UserXxxDto`
+`AppCore\UseCase\UserXxxDto`  
+`AppCore\Infrastructure\Service\UserQueryService`
+
+### ユースケース
+
+```text
+インプットデータに基づいた条件で、実行しアウトプットデータの形式で返却する。
+実行には、リポジトリ・ドメインサービス・クエリーサービスを利用する。
+```
+
+例：  
+`AppCore\UseCase\User\Create\UserCreateUseCaseInterface`  
+`AppCore\UseCase\User\Create\UserCreateInputData`  
+`AppCore\UseCase\User\Create\UserCreateOutputData`  
+`AppCore\Domain\Application\User\UserCreateUseCase`
+
+### ビューモデル
+
+```text
+表示系モデル。値オブジェクトを含まないプリミティブな型で構成する。
+```
+
+例：  
+`AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel`
+
+
+### コントローラ
+
+```text
+クライアントからのリクエストを元に、ユースケースを実行する。
+取得したデータは、表示系モデルに入れてビューに渡す
+```
 
 ## Reference
 
 BEAR.Sunday, REST実装手順  
 https://qiita.com/koriym/items/cb6efd0ab2fb8751f9e9
 
-BEAR.Sunday REST API開発例
+BEAR.Sunday REST API開発例  
 https://qiita.com/koriym/items/93528a16bccc6faf418b
 
 BEAR.Sunday, DDD  
