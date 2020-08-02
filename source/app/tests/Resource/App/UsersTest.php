@@ -14,7 +14,10 @@ use function GuzzleHttp\json_decode;
 
 final class UsersTest extends TestCase
 {
-    /** @var ResourceInterface */
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
+     * @var ResourceInterface
+     */
     private $resource;
 
     protected function setUp(): void
