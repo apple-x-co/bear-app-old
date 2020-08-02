@@ -43,4 +43,10 @@ jobs:
 
       - name: Run tests
         working-directory: ${{env.working-directory}}
+        env:
+          APP_DB_HOST: bear-db
+          APP_DB_NAME: bear-db
+          APP_DB_USER: bear
+          APP_DB_PASS: passw0rd
+          APP_SLAVE_DB_HOSTS: bear-db
         run: composer run-script tests
