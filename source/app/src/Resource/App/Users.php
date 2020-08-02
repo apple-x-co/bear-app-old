@@ -24,12 +24,6 @@ class Users extends ResourceObject
     /** @var UserListUseCaseInterface */
     private $userListUseCase;
 
-    /**
-     * Users constructor.
-     *
-     * @param UserCreateUseCaseInterface $userCreateUseCase
-     * @param UserListUseCaseInterface   $userListUseCase
-     */
     public function __construct(
         UserCreateUseCaseInterface $userCreateUseCase,
         UserListUseCaseInterface $userListUseCase

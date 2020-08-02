@@ -19,7 +19,7 @@ class IndexTest extends TestCase
         $this->resource = $injector->getInstance(ResourceInterface::class);
     }
 
-    public function testOnGet()
+    public function testOnGet(): void
     {
         $ro = $this->resource->get('page://self/index', ['name' => 'BEAR.Sunday']);
         self::assertSame(200, $ro->code);

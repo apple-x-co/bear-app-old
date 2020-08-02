@@ -14,6 +14,9 @@ use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+
 class User extends ResourceObject
 {
     /** @var UserGetUseCaseInterface */
@@ -22,12 +25,6 @@ class User extends ResourceObject
     /** @var UserDeleteUseCaseInterface */
     private $userDeleteUseCase;
 
-    /**
-     * User constructor.
-     *
-     * @param UserGetUseCaseInterface    $userGetUseCase
-     * @param UserDeleteUseCaseInterface $userDeleteUseCase
-     */
     public function __construct(UserGetUseCaseInterface $userGetUseCase, UserDeleteUseCaseInterface $userDeleteUseCase)
     {
         $this->userGetUseCase = $userGetUseCase;
@@ -46,7 +43,7 @@ class User extends ResourceObject
             new UserGetInputData($id)
         );
 
-        $this->body = \GuzzleHttp\json_decode(\GuzzleHttp\json_encode(new UserGetViewModel($output)), true);
+        $this->body = json_decode(json_encode(new UserGetViewModel($output)), true);
 
         return $this;
     }
