@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AppCore\Infrastructure\Persistence\RDB;
 
-use AppCore\Domain\Model\Email;
-use AppCore\Domain\Model\User\Exception\UserNotFoundException;
-use AppCore\Domain\Model\User\User;
-use AppCore\Domain\Model\User\UserId;
-use AppCore\Domain\Model\User\UserName;
-use AppCore\Domain\Model\User\UserRepositoryInterface;
+use AppCore\Domain\Shared\Email;
+use AppCore\Domain\User\Exception\UserNotFoundException;
+use AppCore\Domain\User\User;
+use AppCore\Domain\User\UserId;
+use AppCore\Domain\User\UserName;
+use AppCore\Domain\User\UserRepositoryInterface;
 use Aura\Sql\ExtendedPdoInterface;
 use Generator;
 use Ray\Di\Di\Named;
@@ -142,7 +142,7 @@ final class UserRepository implements UserRepositoryInterface
 
             $id = $this->pdo->lastInsertId('id');
 
-            return new User(
+            return User::reconstruct(
                 new UserId((int) $id),
                 $user->getUserName(),
                 $user->getEmail()
@@ -180,13 +180,10 @@ final class UserRepository implements UserRepositoryInterface
      */
     private function arrayToModel(array $array) : User
     {
-        $user = new User(
+        return User::reconstruct(
             new UserId((int) $array['id']),
             new UserName($array['username']),
             new Email($array['email'])
         );
-        $user->isNew(false);
-
-        return $user;
     }
 }

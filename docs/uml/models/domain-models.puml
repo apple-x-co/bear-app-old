@@ -1,5 +1,8 @@
 @startuml
 
+title DOMAIN MODEL
+
+left to right direction
 hide circle
 hide empty fields
 hide empty methods
@@ -10,7 +13,13 @@ rectangle "User's aggregate" {
         名前
         Eメールアドレス
     }
+
+    class ユーザーXXX {
+        propertyX
+    }
 }
+
+ユーザーXXX --* ユーザー
 
 note right of ユーザー
 ・メソッドは不要

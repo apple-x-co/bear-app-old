@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AppCore\Infrastructure\Service;
 
-use AppCore\Domain\Model\User\UserId;
-use AppCore\UseCase\UserQueryServiceInterface;
-use AppCore\UseCase\UserXxxDto;
+use AppCore\Domain\User\UserId;
+use AppCore\Application\User\UserQueryServiceInterface;
+use AppCore\Application\User\UserXxxDto;
 
 class UserQueryService implements UserQueryServiceInterface
 {

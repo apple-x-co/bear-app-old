@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Module;
 
-use AppCore\Domain\Service\UserDomainServiceInterface;
+use AppCore\Domain\User\UserDomainServiceInterface;
 use AppCore\Infrastructure\Service\UserDomainService;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;

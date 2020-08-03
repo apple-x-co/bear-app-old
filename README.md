@@ -47,8 +47,8 @@ composer run-script tests
 ```
 
 例：  
-`AppCore\Domain\Model\User\UserId`  
-`AppCore\Domain\Model\User\UserName`
+`AppCore\Domain\User\UserId`  
+`AppCore\Domain\User\UserName`
 
 ### ドメインモデル
 
@@ -57,7 +57,7 @@ xxx
 ```
 
 例：  
-`AppCore\Domain\Model\User\User`
+`AppCore\Domain\User\User`
 
 
 ### リポジトリ
@@ -67,7 +67,7 @@ xxx
 ```
 
 例：  
-`AppCore\Domain\Model\User\UserRepositoryInterface`  
+`AppCore\Domain\User\UserRepositoryInterface`  
 `AppCore\Infrastructure\Persistence\RDB\UserRepository`
 
 ### ドメインサービス
@@ -78,7 +78,7 @@ xxx
 ```
 
 例：  
-`AppCore\Domain\Service\UserDomainServiceInterface`  
+`AppCore\Domain\User\UserDomainServiceInterface`  
 `AppCore\Infrastructure\Service\UserDomainService`
 
 ### クエリーサービス（CQRS）
@@ -89,8 +89,8 @@ xxx
 ```
 
 例：  
-`AppCore\UseCase\UserQueryServiceInterface`  
-`AppCore\UseCase\UserXxxDto`  
+`AppCore\Application\User\UserQueryServiceInterface`  
+`AppCore\Application\User\UserXxxDto`  
 `AppCore\Infrastructure\Service\UserQueryService`
 
 ### ユースケース
@@ -101,10 +101,10 @@ xxx
 ```
 
 例：  
-`AppCore\UseCase\User\Create\UserCreateUseCaseInterface`  
-`AppCore\UseCase\User\Create\UserCreateInputData`  
-`AppCore\UseCase\User\Create\UserCreateOutputData`  
-`AppCore\Domain\Application\User\UserCreateUseCase`
+`AppCore\Application\User\Create\UserCreateUseCaseInterface`  
+`AppCore\Application\User\Create\UserCreateInputData`  
+`AppCore\Application\User\Create\UserCreateOutputData`  
+`AppCore\Domain\User\UserCreateUseCase`
 
 ### ビューモデル
 

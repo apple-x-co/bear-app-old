@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace AppCoreTest\Domain\Model\User;
 
-use AppCore\Domain\Model\User\UserName;
+use AppCore\Domain\User\UserName;
 use PHPUnit\Framework\TestCase;
 
 final class UserNameTest extends TestCase

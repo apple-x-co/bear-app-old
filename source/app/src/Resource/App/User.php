@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
+use AppCore\Application\User\Delete\UserDeleteInputData;
+use AppCore\Application\User\Delete\UserDeleteUseCaseInterface;
+use AppCore\Application\User\Get\UserGetInputData;
+use AppCore\Application\User\Get\UserGetUseCaseInterface;
 use AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel;
-use AppCore\UseCase\User\Delete\UserDeleteInputData;
-use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
-use AppCore\UseCase\User\Get\UserGetInputData;
-use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;

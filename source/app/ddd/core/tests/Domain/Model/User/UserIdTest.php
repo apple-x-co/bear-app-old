@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace AppCoreTest\Domain\Model\User;
 
-use AppCore\Domain\Model\User\UserId;
+use AppCore\Domain\User\UserId;
 use PHPUnit\Framework\TestCase;
 
 final class UserIdTest extends TestCase

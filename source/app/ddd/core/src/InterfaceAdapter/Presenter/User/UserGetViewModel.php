@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AppCore\InterfaceAdapter\Presenter\User;
 
-use AppCore\UseCase\User\Get\UserGetOutputData;
+use AppCore\Application\User\Get\UserGetOutputData;
 use JsonSerializable;
 
 class UserGetViewModel implements JsonSerializable

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Module;
 
-use AppCore\Domain\Model\User\UserRepositoryInterface;
+use AppCore\Domain\User\UserRepositoryInterface;
 use AppCore\Infrastructure\Persistence\RDB\UserRepository;
 use AppCore\Infrastructure\Persistence\RDB\UsersCounter;
 use AppCore\Infrastructure\Persistence\RDB\UsersFinder;

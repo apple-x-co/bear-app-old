@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Resource\App;
 
+use AppCore\Application\User\Create\UserCreateInputData;
+use AppCore\Application\User\Create\UserCreateUseCaseInterface;
+use AppCore\Application\User\Get\UserListUseCaseInterface;
 use AppCore\InterfaceAdapter\Presenter\User\UsersGetViewModel;
-use AppCore\UseCase\User\Create\UserCreateInputData;
-use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
-use AppCore\UseCase\User\Get\UserListUseCaseInterface;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;

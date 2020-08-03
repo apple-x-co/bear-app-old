@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace MyVendor\MyProject\Module;
 
-use AppCore\Domain\Application\User\UserCreateUseCase;
-use AppCore\Domain\Application\User\UserDeleteUseCase;
-use AppCore\Domain\Application\User\UserGetUseCase;
-use AppCore\Domain\Application\User\UserListUseCase;
-use AppCore\Domain\Application\User\UserUpdateUseCase;
-use AppCore\UseCase\User\Create\UserCreateUseCaseInterface;
-use AppCore\UseCase\User\Delete\UserDeleteUseCaseInterface;
-use AppCore\UseCase\User\Get\UserGetUseCaseInterface;
-use AppCore\UseCase\User\Get\UserListUseCaseInterface;
-use AppCore\UseCase\User\Update\UserUpdateUseCaseInterface;
+use AppCore\Application\User\Create\UserCreateUseCaseInterface;
+use AppCore\Application\User\Delete\UserDeleteUseCaseInterface;
+use AppCore\Application\User\Get\UserGetUseCaseInterface;
+use AppCore\Application\User\Get\UserListUseCaseInterface;
+use AppCore\Application\User\Update\UserUpdateUseCaseInterface;
+use AppCore\Domain\User\UserCreateUseCase;
+use AppCore\Domain\User\UserDeleteUseCase;
+use AppCore\Domain\User\UserGetUseCase;
+use AppCore\Domain\User\UserListUseCase;
+use AppCore\Domain\User\UserUpdateUseCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 

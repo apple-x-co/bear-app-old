@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AppCore\Infrastructure\Service;
 
-use AppCore\Domain\Model\User\User;
-use AppCore\Domain\Service\UserDomainServiceInterface;
+use AppCore\Domain\User\User;
+use AppCore\Domain\User\UserDomainServiceInterface;
 use Ray\Di\Di\Named;
 use Ray\Query\RowInterface;
 
