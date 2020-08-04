@@ -1,5 +1,7 @@
 @startuml
 
+!include ../config.txt
+
 title USE CASE
 
 left to right direction

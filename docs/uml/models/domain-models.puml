@@ -1,5 +1,7 @@
 @startuml
 
+!include ../config.txt
+
 title DOMAIN MODEL
 
 left to right direction
@@ -9,17 +11,17 @@ hide empty methods
 
 rectangle "User's aggregate" {
     class ユーザー {
-        ユーザーID
-        名前
-        Eメールアドレス
+        + ユーザーID
+        + 名前
+        + Eメールアドレス
     }
 
     class ユーザーXXX {
-        propertyX
+        + propertyX
     }
 }
 
-ユーザーXXX --* ユーザー
+ユーザーXXX --* ユーザー : コンポジション
 
 note right of ユーザー
 ・メソッドは不要
@@ -30,16 +32,16 @@ end note
 
 rectangle "Recipe's aggregate" {
     class レシピ {
-        ユーザーID
-        レシピID
+        + ユーザーID
+        + レシピID
     }
 
     class レシピカテゴリ {
-        レシピID
+        + レシピID
     }
 }
 
-レシピ --> ユーザー: ID参照
-レシピカテゴリ --o レシピ
+レシピ --> ユーザー : 関連
+レシピカテゴリ --o レシピ : 集約
 
 @enduml
