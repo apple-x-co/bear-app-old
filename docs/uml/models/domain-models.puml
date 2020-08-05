@@ -4,6 +4,7 @@
 
 title DOMAIN MODEL
 
+scale 0.9
 left to right direction
 hide circle
 hide empty fields
@@ -30,18 +31,23 @@ note right of ユーザー
 　　例：ユーザーは、XXの状態で作成される
 end note
 
-rectangle "Recipe's aggregate" {
-    class レシピ {
-        + ユーザーID
-        + レシピID
+rectangle "Another aggregate" {
+    class ClassA {
+        + propertyA
+        + propertyB
     }
-
-    class レシピカテゴリ {
-        + レシピID
+    class ClassB {
+        + propertyC
+        + propertyD
+    }
+    class ClassC {
+        + propertyA
+        + propertyC
     }
 }
 
-レシピ --> ユーザー : 関連
-レシピカテゴリ --o レシピ : 集約
+ClassA --> ユーザー
+ClassA -- ClassB
+(ClassA, ClassB) .. ClassC : 関連
 
 @enduml
