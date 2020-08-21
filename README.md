@@ -92,7 +92,7 @@ composer run-script tests
 
 ### ドメイン層ではない（例：通知、認証）
 
-例：
+例：  
 `AppCore\Application\Shared\PushNotificationInterface`  
 `AppCore\Infrastructure\Shared\PushNotification`
 
