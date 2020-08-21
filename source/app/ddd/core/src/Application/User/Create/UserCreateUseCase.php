@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Domain\User;
+namespace AppCore\Application\User\Create;
 
-use AppCore\Application\User\Create\UserCreateInputData;
-use AppCore\Application\User\Create\UserCreateOutputData;
-use AppCore\Application\User\Create\UserCreateUseCaseInterface;
 use AppCore\Domain\Shared\Email;
 use AppCore\Domain\User\Exception\UserDuplicationException;
+use AppCore\Domain\User\User;
+use AppCore\Domain\User\UserDomainServiceInterface;
+use AppCore\Domain\User\UserName;
+use AppCore\Domain\User\UserRepositoryInterface;
 
-class UserCreateUseCase implements UserCreateUseCaseInterface
+class UserCreateUseCase
 {
     /** @var UserRepositoryInterface */
     private $userRepository;

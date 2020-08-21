@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Domain\User;
+namespace AppCore\Application\User\Delete;
 
-use AppCore\Application\User\Get\UserGetInputData;
-use AppCore\Application\User\Get\UserGetOutputData;
-use AppCore\Application\User\Get\UserGetUseCaseInterface;
+use AppCore\Domain\User\UserRepositoryInterface;
 
-class UserGetUseCase implements UserGetUseCaseInterface
+class UserDeleteUseCase
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
 
     /**
-     * UserGetUseCase constructor.
+     * UserDeleteUseCase constructor.
      *
      * @param UserRepositoryInterface $userRepository
      */
@@ -26,10 +24,10 @@ class UserGetUseCase implements UserGetUseCaseInterface
     /**
      * @inheritDoc
      */
-    public function handle(UserGetInputData $input): UserGetOutputData
+    public function handle(UserDeleteInputData $input): void
     {
         $user = $this->userRepository->get($input->getId());
 
-        return new UserGetOutputData($user);
+        $this->userRepository->delete($user->getId()->val());
     }
 }

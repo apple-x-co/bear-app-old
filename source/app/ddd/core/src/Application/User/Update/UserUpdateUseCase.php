@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Domain\User;
+namespace AppCore\Application\User\Update;
 
-use AppCore\Application\User\Update\UserUpdateInputData;
-use AppCore\Application\User\Update\UserUpdateUseCaseInterface;
 use AppCore\Domain\Shared\Email;
 use AppCore\Domain\User\Exception\UserDuplicationException;
+use AppCore\Domain\User\UserDomainServiceInterface;
+use AppCore\Domain\User\UserName;
+use AppCore\Domain\User\UserRepositoryInterface;
 
-class UserUpdateUseCase implements UserUpdateUseCaseInterface
+class UserUpdateUseCase
 {
     /** @var UserRepositoryInterface */
     private $userRepository;

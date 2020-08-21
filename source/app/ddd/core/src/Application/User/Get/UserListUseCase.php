@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Domain\User;
+namespace AppCore\Application\User\Get;
 
-use AppCore\Application\User\Get\UserListOutputData;
-use AppCore\Application\User\Get\UserListUseCaseInterface;
+use AppCore\Domain\User\UserRepositoryInterface;
 use Generator;
 
-class UserListUseCase implements UserListUseCaseInterface
+class UserListUseCase
 {
     /** @var UserRepositoryInterface */
     private $userRepository;

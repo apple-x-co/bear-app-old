@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\Create\UserCreateInputData;
-use AppCore\Application\User\Create\UserCreateUseCaseInterface;
-use AppCore\Application\User\Get\UserListUseCaseInterface;
+use AppCore\Application\User\Create\UserCreateUseCase;
+use AppCore\Application\User\Get\UserListUseCase;
 use AppCore\InterfaceAdapter\Presenter\User\UsersGetViewModel;
 use BEAR\RepositoryModule\Annotation\Purge;
 use BEAR\Resource\Annotation\JsonSchema;
@@ -18,15 +18,15 @@ use Ray\AuraSqlModule\Annotation\Transactional;
 
 class Users extends ResourceObject
 {
-    /** @var UserCreateUseCaseInterface */
+    /** @var UserCreateUseCase */
     private $userCreateUseCase;
 
-    /** @var UserListUseCaseInterface */
+    /** @var UserListUseCase */
     private $userListUseCase;
 
     public function __construct(
-        UserCreateUseCaseInterface $userCreateUseCase,
-        UserListUseCaseInterface $userListUseCase
+        UserCreateUseCase $userCreateUseCase,
+        UserListUseCase $userListUseCase
     ) {
         $this->userCreateUseCase = $userCreateUseCase;
         $this->userListUseCase = $userListUseCase;

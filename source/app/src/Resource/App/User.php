@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace MyVendor\MyProject\Resource\App;
 
 use AppCore\Application\User\Delete\UserDeleteInputData;
-use AppCore\Application\User\Delete\UserDeleteUseCaseInterface;
+use AppCore\Application\User\Delete\UserDeleteUseCase;
 use AppCore\Application\User\Get\UserGetInputData;
-use AppCore\Application\User\Get\UserGetUseCaseInterface;
+use AppCore\Application\User\Get\UserGetUseCase;
 use AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
@@ -19,13 +19,13 @@ use function GuzzleHttp\json_encode;
 
 class User extends ResourceObject
 {
-    /** @var UserGetUseCaseInterface */
+    /** @var UserGetUseCase */
     private $userGetUseCase;
 
-    /** @var UserDeleteUseCaseInterface */
+    /** @var UserDeleteUseCase */
     private $userDeleteUseCase;
 
-    public function __construct(UserGetUseCaseInterface $userGetUseCase, UserDeleteUseCaseInterface $userDeleteUseCase)
+    public function __construct(UserGetUseCase $userGetUseCase, UserDeleteUseCase $userDeleteUseCase)
     {
         $this->userGetUseCase = $userGetUseCase;
         $this->userDeleteUseCase = $userDeleteUseCase;
