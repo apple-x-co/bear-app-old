@@ -36,14 +36,16 @@ composer run-script tests
 `docs/uml/models/domain-models.puml`
 
 
-## Program structure（DDD + CleanArchitecture）
+## Program structure（DDD + Onion??）
 
 ### 値オブジェクト
 
 ```text
 以下に該当しない場合は、プリミティブ型（int,string,bool）にする
 ・ルールが存在しているか  
-・その値を単体で扱いたいか  
+・その値を単体で扱いたいか
+
+なお、識別子は値オブジェクトにした方が良い。  
 ```
 
 例：  
@@ -52,13 +54,8 @@ composer run-script tests
 
 ### ドメインモデル
 
-```text
-xxx
-```
-
 例：  
 `AppCore\Domain\User\User`
-
 
 ### リポジトリ
 
@@ -74,7 +71,7 @@ xxx
 
 ```text
 モデルや値オブジェクトに定義した場合に、不自然さがある場合にドメインサービスを利用する。
-主に、ルールや制約を定義する。例えば、重複チェック。
+主に、集合に対するルールや制約を定義する。例えば、重複チェック。
 ```
 
 例：  
@@ -92,6 +89,15 @@ xxx
 `AppCore\Application\User\UserQueryServiceInterface`  
 `AppCore\Application\User\UserXxxDto`  
 `AppCore\Infrastructure\Service\UserQueryService`
+
+### ドメイン層ではない（例：通知、認証）
+
+例：
+`AppCore\Application\Shared\PushNotificationInterface`  
+`AppCore\Infrastructure\Shared\PushNotification`
+
+`AppCore\Application\Shared\AuthenticationInterface`  
+`AppCore\Infrastructure\Shared\Authentication`
 
 ### ユースケース
 
@@ -114,7 +120,6 @@ xxx
 
 例：  
 `AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel`
-
 
 ### コントローラ
 
