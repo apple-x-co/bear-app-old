@@ -97,11 +97,16 @@ composer run-script tests
 ```
 
 例：  
-`AppCore\Application\Shared\PushNotificationInterface`  
-`AppCore\Infrastructure\Shared\PushNotification`
-
 `AppCore\Application\Shared\AuthenticationInterface`  
-`AppCore\Infrastructure\Shared\Authentication`
+`AppCore\Infrastructure\Shared\Authentication`  
+
+`AppCore\Domain\PushNotification\PushNotificationSenderInterface`  
+`AppCore\Domain\PushNotification\PushMessage`  
+`AppCore\Infrastructure\Shared\PushNotificationSender`  
+
+`AppCore\Domain\Email\EmailSenderInterface`  
+`AppCore\Domain\Email\Email`  
+`AppCore\Infrastructure\Shared\EmailSender`  
 
 ### ユースケース
 
