@@ -90,7 +90,11 @@ composer run-script tests
 `AppCore\Application\User\UserXxxDto`  
 `AppCore\Infrastructure\Service\UserQueryService`
 
-### ドメイン層ではない（例：通知、認証）
+### システム外部との入出力（例：メール送信）
+
+```text
+内部の層(ドメイン層、ユースケース層)にインターフェイスを定義し、インフラ層に実装クラスを置く。
+```
 
 例：  
 `AppCore\Application\Shared\PushNotificationInterface`  
@@ -128,6 +132,20 @@ composer run-script tests
 取得したデータは、表示系モデルに入れてビューに渡す
 ```
 
+## Architecture
+
+Onion Architecture  
+https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/  
+
+ITDDD  
+https://github.com/nrslib/itddd
+
+CQRS実践入門  
+https://little-hands.hatenablog.com/entry/2019/12/02/cqrs
+
+DDDのモデリングとは何なのか、 そしてどうコードに落とすのか  
+https://www.slideshare.net/koichiromatsuoka/domain-modeling-andcoding
+
 ## Reference
 
 BEAR.Sunday, REST実装手順  
@@ -145,17 +163,8 @@ https://qiita.com/hanahiro_aze/items/5dcb08ada243d8c7b8a3
 (Ray.QueryModule) SQL実行入出力の連組配列をarray shapeでタイプする  
 https://gist.github.com/koriym/d0d716a3c2a9fee95426b6a7aeb390e6
 
-ITDDD  
-https://github.com/nrslib/itddd
-
 JsonSchema Form  
 https://github.com/rjsf-team/react-jsonschema-form
-
-CQRS実践入門  
-https://little-hands.hatenablog.com/entry/2019/12/02/cqrs
-
-DDDのモデリングとは何なのか、 そしてどうコードに落とすのか  
-https://www.slideshare.net/koichiromatsuoka/domain-modeling-andcoding
 
 PlantUML  
 https://plantuml.com/ja/class-diagram
