@@ -75,8 +75,7 @@ composer run-script tests
 ```
 
 例：  
-`AppCore\Domain\User\UserDomainServiceInterface`  
-`AppCore\Infrastructure\Service\UserDomainService`
+`AppCore\Domain\User\UserDomainService`  
 
 ### クエリーサービス（CQRS）
 

@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Infrastructure\Service;
+namespace AppCore\Domain\User;
 
-use AppCore\Domain\User\User;
-use AppCore\Domain\User\UserDomainServiceInterface;
 use Ray\Di\Di\Named;
 use Ray\Query\RowInterface;
 
-final class UserDomainService implements UserDomainServiceInterface
+final class UserDomainService
 {
     /** @var RowInterface */
     private $getUser;

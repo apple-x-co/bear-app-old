@@ -6,7 +6,7 @@ namespace AppCore\Application\User\Update;
 
 use AppCore\Domain\Shared\Email;
 use AppCore\Domain\User\Exception\UserDuplicationException;
-use AppCore\Domain\User\UserDomainServiceInterface;
+use AppCore\Domain\User\UserDomainService;
 use AppCore\Domain\User\UserName;
 use AppCore\Domain\User\UserRepositoryInterface;
 
@@ -15,16 +15,16 @@ class UserUpdateUseCase
     /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /** @var UserDomainServiceInterface */
+    /** @var UserDomainService */
     private $userDomainService;
 
     /**
      * UserUpdateUseCase constructor.
      *
      * @param UserRepositoryInterface    $userRepository
-     * @param UserDomainServiceInterface $userDomainService
+     * @param UserDomainService $userDomainService
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserDomainServiceInterface $userDomainService)
+    public function __construct(UserRepositoryInterface $userRepository, UserDomainService $userDomainService)
     {
         $this->userRepository = $userRepository;
         $this->userDomainService = $userDomainService;
