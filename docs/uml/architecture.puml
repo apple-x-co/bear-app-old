@@ -29,6 +29,7 @@ rectangle "Application Layer" as app #D1EEF9
 
 note left of (app)
 ・Use case
+---
 ・Query Service Interface(CQRS Read) & DTO
 ・Authentication Interface
 end note
@@ -40,10 +41,12 @@ note right of (domain)
 ・Value Object
 ・Model
 ・Domain Service
+・Factory
+　* Policy ...
+---
 ・Repository Interface
 ・External System Interface
-　* Mail
-・Factory
+　* Mail ...
 end note
 
 '-----------
