@@ -1,0 +1,57 @@
+@startuml
+
+!include ./config.txt
+
+title Architecture
+
+'-----------
+rectangle "Presentation Layer" as presentation #FFF9ED
+
+note left of (presentation)
+・Endpoint
+・Validation　
+　* JSON Schema
+・Mapping input data
+end note
+
+'-----------
+rectangle "Infrastructure Layer" as infra #FEEEEB
+
+note right of (infra)
+・Repository
+・Query Service
+・External System
+・Authentication
+end note
+
+'-----------
+rectangle "Application Layer" as app #D1EEF9
+
+note left of (app)
+・Use case
+・Query Service Interface & DTO
+・Authentication Interface
+end note
+
+'-----------
+rectangle "Domain Layer" as domain #CDF3EA
+
+note right of (domain)
+・Value Object
+・Model
+・Domain Service
+・Repository Interface
+・External System Interface
+　* Mail
+・Factory
+end note
+
+'-----------
+http ..> presentation
+cli ..> presentation
+presentation --> app
+infra --|> app
+app --> domain
+infra --|> domain
+
+@enduml

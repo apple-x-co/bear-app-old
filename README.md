@@ -115,10 +115,9 @@ composer run-script tests
 ```
 
 例：  
-`AppCore\Application\User\Create\UserCreateUseCaseInterface`  
 `AppCore\Application\User\Create\UserCreateInputData`  
 `AppCore\Application\User\Create\UserCreateOutputData`  
-`AppCore\Domain\User\UserCreateUseCase`
+`AppCore\Application\User\UserCreateUseCase`
 
 ### ビューモデル
 
