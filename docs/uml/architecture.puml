@@ -19,7 +19,7 @@ rectangle "Infrastructure Layer" as infra #FEEEEB
 
 note right of (infra)
 ・Repository
-・Query Service
+・Query Service(CQRS Read)
 ・External System
 ・Authentication
 end note
@@ -29,7 +29,7 @@ rectangle "Application Layer" as app #D1EEF9
 
 note left of (app)
 ・Use case
-・Query Service Interface & DTO
+・Query Service Interface(CQRS Read) & DTO
 ・Authentication Interface
 end note
 
