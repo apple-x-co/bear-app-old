@@ -21,7 +21,7 @@ composer run-script tests
 
 ## Diagram
 
-### ユースケース図
+### Use Case
 
 「○○を△△する」形式で記載する  
 
@@ -30,7 +30,7 @@ composer run-script tests
 
 ![user](./docs/uml/use-cases/user.png)
 
-### モデル図
+### Modeling
 
 集約を明確にする。集約内は同一トランザクションで処理を行うので    
 階層を深くしたり、集約内のモデルを増やさない  
