@@ -28,13 +28,17 @@ composer run-script tests
 例：  
 `docs/uml/use-cases/user.puml`
 
+![user](./docs/uml/use-cases/user.png)
+
 ### モデル図
 
-集約を明確にする  
+集約を明確にする。集約内は同一トランザクションで処理を行うので    
+階層を深くしたり、集約内のモデルを増やさない  
 
 例：  
 `docs/uml/models/domain-models.puml`
 
+![user](./docs/uml/models/domain_models.png)
 
 ## Architecture
 
