@@ -36,7 +36,9 @@ composer run-script tests
 `docs/uml/models/domain-models.puml`
 
 
-## Program structure（DDD + Onion??）
+## Architecture
+
+![onion](./docs/uml/architecture.png)
 
 ### 値オブジェクト
 
@@ -135,7 +137,7 @@ composer run-script tests
 取得したデータは、表示系モデルに入れてビューに渡す
 ```
 
-## Architecture
+## Reference
 
 Onion Architecture  
 https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/  
@@ -148,8 +150,6 @@ https://little-hands.hatenablog.com/entry/2019/12/02/cqrs
 
 DDDのモデリングとは何なのか、 そしてどうコードに落とすのか  
 https://www.slideshare.net/koichiromatsuoka/domain-modeling-andcoding
-
-## Reference
 
 BEAR.Sunday, REST実装手順  
 https://qiita.com/koriym/items/cb6efd0ab2fb8751f9e9
