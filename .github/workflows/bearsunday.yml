@@ -1,0 +1,37 @@
+name: compile BEAR.Sunday
+on:
+  workflow_dispatch:
+    branches:
+      - master
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./source/app
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate composer.json and composer.lock
+        working-directory: ${{ env.working-directory }}
+        run: composer validate
+      - name: Install dependencies
+        working-directory: ${{ env.working-directory }}
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run compile
+        working-directory: ${{ env.working-directory }}
+        env:
+          APP_DB_HOST: xxx
+          APP_DB_NAME: xxx
+          APP_DB_USER: xxx
+          APP_DB_PASS: xxx
+          APP_DB_DNS: xxx
+          APP_SLAVE_DB_HOSTS: xxx
+        run: composer run-script compile
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}

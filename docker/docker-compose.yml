@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: buddyingdevelopment/php:amzn2-php72-apache24
+    image: ghcr.io/buddying-inc/buddying-php:amazonlinux2-apache24-php72
     container_name: bear-app
     working_dir: /var/www/vhosts/bear
     volumes:
@@ -17,7 +17,7 @@ services:
       - COMPOSER_ALLOW_SUPERUSER=1
 
   db:
-    image: buddyingdevelopment/mysql:5.7
+    image: ghcr.io/buddying-inc/buddying-mysql57:latest
     container_name: bear-db
     volumes:
       - ./.db:/var/lib/mysql:delegated

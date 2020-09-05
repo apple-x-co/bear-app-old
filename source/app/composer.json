@@ -35,7 +35,10 @@
         "setup": [
             "php bin/setup.php"
         ],
-        "compile": "bear.compile 'MyVendor\\MyProject' prod-app ./",
+        "compile": [
+            "bear.compile 'MyVendor\\MyProject' prod-app ./",
+            "bear.compile 'MyVendor\\MyProject' prod-hal-api-app ./"
+        ],
         "test": [
             "phpunit"
         ],
