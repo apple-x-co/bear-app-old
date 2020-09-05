@@ -3,7 +3,8 @@ use BEAR\Package\Bootstrap;
 use BEAR\Resource\ResourceObject;
 
 return function (string $context, string $name = 'MyVendor\MyProject') : int {
-    $app = (new Bootstrap)->getApp($name, $context, __DIR__);
+    $app = \MyVendor\MyProject\Injector::getInstance($context)->getInstance(\BEAR\Sunday\Extension\Application\AppInterface::class);
+
     if ($app->httpCache->isNotModified($_SERVER)) {
         $app->httpCache->transfer();
 

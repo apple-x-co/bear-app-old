@@ -1,13 +1,17 @@
 <?php
+
 declare(strict_types=1);
+
 namespace AppCore\Application\User;
 
-use Generator;
+use AppCore\Domain\User\UserId;
 
 interface UserQueryServiceInterface
 {
     /**
-     * @return Generator
+     * @param UserId $userId
+     *
+     * @return UserXxxDto
      */
-    public function list() : Generator;
+    public function fetchByUserId(UserId $userId): UserXxxDto;
 }

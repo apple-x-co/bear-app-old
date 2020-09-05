@@ -1,47 +1,55 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\App;
 
-use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
+use MyVendor\MyProject\Injector;
 use PHPUnit\Framework\TestCase;
+
+use function GuzzleHttp\json_decode;
 
 final class UsersTest extends TestCase
 {
-    /** @var ResourceInterface */
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
+     * @var ResourceInterface
+     */
     private $resource;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-hal-api-app'))->getInstance(ResourceInterface::class);
+        $injector = Injector::getInstance('test-hal-api-app');
+        $this->resource = $injector->getInstance(ResourceInterface::class);
     }
 
-    public function testOnPost() : void
+    public function testOnPost(): void
     {
         $ro = $this->resource->post('app://self/users', [
             'username' => 'bear',
-            'email' => 'bear@example.com'
+            'email' => 'bear@example.com',
         ]);
-        $this->assertSame(StatusCode::CREATED, $ro->code);
-        $this->assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
+        self::assertSame(StatusCode::CREATED, $ro->code);
+        self::assertStringStartsWith('/users/', $ro->headers[ResponseHeader::LOCATION]);
 
         $json = (string) $ro;
-        $href = \GuzzleHttp\json_decode($json)->_links->{'detail'}->href;
-        $this->assertNotEmpty($href);
+        $href = json_decode($json)->_links->{'detail'}->href;
+        self::assertNotEmpty($href);
     }
 
     /**
      * @depends testOnPost
      */
-    public function testOnGet() : void
+    public function testOnGet(): void
     {
         $ro = $this->resource->get('app://self/users');
-        $this->assertSame(StatusCode::OK, $ro->code);
+        self::assertSame(StatusCode::OK, $ro->code);
 
         $json = (string) $ro;
-        $href = \GuzzleHttp\json_decode($json)->_links->{'create'}->href;
-        $this->assertNotEmpty($href);
+        $href = json_decode($json)->_links->{'create'}->href;
+        self::assertNotEmpty($href);
     }
 }

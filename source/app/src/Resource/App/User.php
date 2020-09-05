@@ -1,65 +1,57 @@
 <?php
+
 declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\App;
 
-use AppCore\Application\User\UserApplicationService;
-use AppCore\Application\User\UserDeleteCommand;
-use AppCore\Application\User\UserGetCommand;
+use AppCore\Application\User\Delete\UserDeleteInputData;
+use AppCore\Application\User\Delete\UserDeleteUseCase;
+use AppCore\Application\User\Get\UserGetInputData;
+use AppCore\Application\User\Get\UserGetUseCase;
+use AppCore\InterfaceAdapter\Presenter\User\UserGetViewModel;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 
-/**
- * Class User
- */
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+
 class User extends ResourceObject
 {
-    /** @var UserApplicationService */
-    private $userApplicationService;
+    /** @var UserGetUseCase */
+    private $userGetUseCase;
 
-    /**
-     * User constructor.
-     *
-     * @param UserApplicationService $userApplicationService
-     */
-    public function __construct(UserApplicationService $userApplicationService)
+    /** @var UserDeleteUseCase */
+    private $userDeleteUseCase;
+
+    public function __construct(UserGetUseCase $userGetUseCase, UserDeleteUseCase $userDeleteUseCase)
     {
-        $this->userApplicationService = $userApplicationService;
+        $this->userGetUseCase = $userGetUseCase;
+        $this->userDeleteUseCase = $userDeleteUseCase;
     }
 
     /**
-     * @param int $id
-     *
      * @return $this|ResourceObject
      *
      * @JsonSchema(schema="user.json")
      * @Link(rel="delete", href="/users/{id}", method="delete")
      */
-    public function onGet(int $id) : ResourceObject
+    public function onGet(int $id): ResourceObject
     {
-        $user = $this->userApplicationService->get(
-            new UserGetCommand($id)
+        $output = $this->userGetUseCase->handle(
+            new UserGetInputData($id)
         );
 
-        $this->body = [
-            'id' => $user->getId(),
-            'username' => $user->getUserName(),
-            'email' => $user->getEmail()
-        ];
+        $this->body = json_decode(json_encode(new UserGetViewModel($output)), true);
 
         return $this;
     }
 
-    /**
-     * @param int $id
-     *
-     * @return ResourceObject
-     */
-    public function onDelete(int $id) : ResourceObject
+    public function onDelete(int $id): ResourceObject
     {
-        $this->userApplicationService->delete(
-            new UserDeleteCommand($id)
+        $this->userDeleteUseCase->handle(
+            new UserDeleteInputData($id)
         );
 
         $this->code = StatusCode::NO_CONTENT;

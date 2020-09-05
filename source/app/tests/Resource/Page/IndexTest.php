@@ -1,26 +1,31 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MyVendor\MyProject\Resource\Page;
 
-use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
+use MyVendor\MyProject\Injector;
 use PHPUnit\Framework\TestCase;
 
 class IndexTest extends TestCase
 {
     /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
      * @var ResourceInterface
      */
     private $resource;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->resource = (new AppInjector('MyVendor\MyProject', 'test-app'))->getInstance(ResourceInterface::class);
+        $injector = Injector::getInstance('test-app');
+        $this->resource = $injector->getInstance(ResourceInterface::class);
     }
 
-    public function testOnGet()
+    public function testOnGet(): void
     {
         $ro = $this->resource->get('page://self/index', ['name' => 'BEAR.Sunday']);
-        $this->assertSame(200, $ro->code);
-        $this->assertSame('Hello BEAR.Sunday', $ro->body['greeting']);
+        self::assertSame(200, $ro->code);
+        self::assertSame('Hello BEAR.Sunday', $ro->body['greeting']);
     }
 }

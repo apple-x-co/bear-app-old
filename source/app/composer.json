@@ -41,21 +41,25 @@
         ],
         "tests": [
             "@cs",
-            "phpmd src text ./phpmd.xml",
-            "phpstan analyse -c phpstan.neon --no-progress",
-            "psalm",
+            "@qa",
             "@test"
         ],
         "coverage": [
-            "php -dzend_extension=xdebug.so phpunit --coverage-text --coverage-html=build/coverage"
+            "php -dzend_extension=xdebug.so ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"
+        ],
+        "pcov": [
+            "php -d pcov.enabled=1 ./vendor/bin/phpunit --coverage-text --coverage-html=build/coverage"
         ],
         "cs": [
-            "php-cs-fixer fix -v --dry-run",
-            "phpcs --standard=phpcs.xml src;"
+            "phpcs"
         ],
         "cs-fix": [
-            "php-cs-fixer fix -v",
-            "phpcbf src tests"
+            "phpcbf; if [ $? -eq 1 ]; then exit 0; fi"
+        ],
+        "qa": [
+            "phpmd src text ./phpmd.xml",
+            "phpstan analyse -c phpstan.neon --no-progress",
+            "psalm --no-progress"
         ],
         "serve": "php -dzend_extension=xdebug.so -S 127.0.0.1:8080 -t public",
         "app": "php bin/app.php",
@@ -63,13 +67,15 @@
     },
     "scripts-descriptions": {
         "setup": "Setup the project",
-        "compile": "Compile autoload and DI scripts",
+        "compile": "Compile scripts for the production. See http://bearsunday.github.io/manuals/1.0/en/production.html",
         "test": "Run unit tests",
         "tests": "Run tests and quality checks",
         "coverage": "Generate test coverage report",
+        "pcov": "Generate test coverage report (pcov)",
         "cs": "Checks the coding standard",
         "cs-fix": "Fix the coding standard",
-        "serve": "Start php built-in server",
+        "qa": "Run quality checks",
+        "serve": "Start built-in server",
         "app": "Request app resource",
         "page": "Request page resource"
     },

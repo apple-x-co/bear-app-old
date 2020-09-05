@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace AppCoreTest\Domain\Model;
 
-use AppCore\Domain\Model\Email;
+use AppCore\Domain\Shared\Email;
 use PHPUnit\Framework\TestCase;
 
 final class EmailTest extends TestCase
