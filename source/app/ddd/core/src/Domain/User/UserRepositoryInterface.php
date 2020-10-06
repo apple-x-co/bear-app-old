@@ -24,6 +24,8 @@ interface UserRepositoryInterface
      * @param array<string, string|int|array> $conditions
      *
      * @return int
+     *
+     * @deprecated QueryModuleを利用してアクセスパターン毎にメソッドを用意する
      */
     public function count(array $conditions = []) : int;
 
@@ -32,6 +34,8 @@ interface UserRepositoryInterface
      * @param array{order?: \AppCore\Infrastructure\OrderBy[], limit?: int, offset?: int} $options
      *
      * @return Generator
+     *
+     * @deprecated QueryModuleを利用してアクセスパターン毎にメソッドを用意する
      */
     public function find(array $conditions = [], array $options = []) : Generator;
 
