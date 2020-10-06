@@ -1,4 +1,4 @@
-name: compile BEAR.Sunday
+name: Compile BEAR.Sunday
 on:
   workflow_dispatch:
     branches:
