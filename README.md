@@ -7,7 +7,8 @@
 
 ```bash
 composer create-project -n bear/skeleton app
-composer require bear/aura-router-module ray/query-module
+composer require bear/aura-router-module ^2.0
+composer require ray/query-module ^0.1
 composer setup
 ./vendor/bin/psalm --init
 ```
