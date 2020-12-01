@@ -1,6 +1,8 @@
 <?php
+
 declare(strict_types=1);
-namespace AppCoreTest\Domain\Model\User;
+
+namespace AppCore\Domain\Model\User;
 
 use AppCore\Domain\Shared\Email;
 use AppCore\Domain\User\User;
@@ -10,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UserTest extends TestCase
 {
-    public function testNewUser() : void
+    public function testNewUser(): void
     {
         $user = new User(
             new UserName('bear'),
@@ -20,7 +22,7 @@ final class UserTest extends TestCase
         self::assertSame('bear@example.com', $user->getEmail()->val());
     }
 
-    public function testExistsUser() : void
+    public function testExistsUser(): void
     {
         $user = User::reconstruct(
             new UserId(1),
@@ -32,7 +34,7 @@ final class UserTest extends TestCase
         self::assertSame('bear@example.com', $user->getEmail()->val());
     }
 
-    public function testChangeName() : void
+    public function testChangeName(): void
     {
         $user = User::reconstruct(
             new UserId(1),
@@ -44,7 +46,7 @@ final class UserTest extends TestCase
         self::assertSame('BEAR', $user->getUserName()->val());
     }
 
-    public function testChangeEmail() : void
+    public function testChangeEmail(): void
     {
         $user = User::reconstruct(
             new UserId(1),

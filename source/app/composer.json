@@ -22,7 +22,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MyVendor\\MyProject\\": "tests/"
+            "MyVendor\\MyProject\\": "tests/",
+            "AppCore\\": "ddd/core/tests/"
         }
     },
     "scripts": {
