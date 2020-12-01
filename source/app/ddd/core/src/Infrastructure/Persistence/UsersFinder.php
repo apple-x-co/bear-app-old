@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Infrastructure\Persistence\RDB;
+namespace AppCore\Infrastructure\Persistence;
 
+use AppCore\Infrastructure\Persistence\RDB\LimitOffsetClause;
+use AppCore\Infrastructure\Persistence\RDB\OrderClause;
+use AppCore\Infrastructure\Persistence\RDB\WhereClause;
 use Ray\AuraSqlModule\AuraSqlInject;
 use Ray\AuraSqlModule\AuraSqlSelectInject;
 use Ray\Query\QueryInterface;

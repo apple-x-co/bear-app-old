@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AppCore\Infrastructure\Persistence\RDB;
+namespace AppCore\Infrastructure\Persistence;
 
 use AppCore\Domain\Shared\Email;
 use AppCore\Domain\User\Exception\UserNotFoundException;

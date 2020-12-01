@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace MyVendor\MyProject\Module;
 
 use AppCore\Domain\User\UserRepositoryInterface;
-use AppCore\Infrastructure\Persistence\RDB\UserRepository;
-use AppCore\Infrastructure\Persistence\RDB\UsersCounter;
-use AppCore\Infrastructure\Persistence\RDB\UsersFinder;
+use AppCore\Infrastructure\Persistence\UserRepository;
+use AppCore\Infrastructure\Persistence\UsersCounter;
+use AppCore\Infrastructure\Persistence\UsersFinder;
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 
